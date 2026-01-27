@@ -5,8 +5,18 @@
 
 [node name="Main" type="Node2D" unique_id=411968189]
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=691321215]
+position = Vector2(1117, 203)
+zoom = Vector2(0.5, 0.5)
+
 [node name="Npc" parent="." unique_id=2014714834 instance=ExtResource("1_ig7tw")]
-position = Vector2(115, 295)
+position = Vector2(115, 192)
 
 [node name="Ground" parent="." unique_id=440286135 instance=ExtResource("2_0xm2m")]
 position = Vector2(257, 510)
+
+[node name="Ground2" parent="." unique_id=2019687451 instance=ExtResource("2_0xm2m")]
+position = Vector2(852, 596)
+
+[node name="Ground3" parent="." unique_id=734461870 instance=ExtResource("2_0xm2m")]
+position = Vector2(1849, 596)

@@ -3,12 +3,25 @@
 [ext_resource type="Script" uid="uid://dox6gfqdtrmtx" path="res://npc/npc.gd" id="1_3i1kj"]
 [ext_resource type="Texture2D" uid="uid://bfj75m4h4w0jp" path="res://art/him_0.png" id="1_nhy3c"]
 [ext_resource type="Texture2D" uid="uid://bsqlti50011l4" path="res://art/him_1.png" id="2_3i1kj"]
+[ext_resource type="Texture2D" uid="uid://b0ul7tw60j1eq" path="res://art/him_fall_0.png" id="2_ldo70"]
+[ext_resource type="Texture2D" uid="uid://do2san5iscsbx" path="res://art/him_fall_1.png" id="3_fnhme"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3i1kj"]
 size = Vector2(218, 358)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o6cys"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ldo70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fnhme")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_nhy3c")
@@ -32,12 +45,17 @@ animations = [{
 [node name="Npc" type="RigidBody2D" unique_id=65313899]
 can_sleep = false
 lock_rotation = true
+custom_integrator = true
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 5
 script = ExtResource("1_3i1kj")
-move_speed = Vector2(200, 0)
+ground_accel = 10000.0
+air_accel = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=754904166]
 shape = SubResource("RectangleShape2D_3i1kj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1764537641]
 sprite_frames = SubResource("SpriteFrames_o6cys")
-animation = &"move"
+animation = &"fall"
