@@ -1,0 +1,45 @@
+[gd_scene format=4 uid="uid://bq8b1hv10jtr0"]
+
+[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_1j2ip"]
+[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="1_f6f60"]
+[ext_resource type="TileSet" uid="uid://b4spg8mi60jqv" path="res://art/Images/Tilemaps/test_tiles.tres" id="1_o7ya6"]
+[ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="3_m00k7"]
+[ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="3_yn8rc"]
+
+[node name="game_01" type="Node2D" unique_id=2096551147]
+
+[node name="level_config" type="Node" parent="." unique_id=885048635]
+script = ExtResource("1_1j2ip")
+bit_0 = true
+metadata/_custom_type_script = "uid://cmnmdmgutt0t0"
+
+[node name="tilemap_always" type="TileMapLayer" parent="." unique_id=298539414]
+tile_map_data = PackedByteArray("AAATABQAAAARAAkAAAA=")
+tile_set = ExtResource("1_o7ya6")
+script = ExtResource("1_f6f60")
+metadata/_custom_type_script = "uid://de0qurd6w0sdi"
+
+[node name="tilemap_0" type="TileMapLayer" parent="." unique_id=840074273]
+tile_map_data = PackedByteArray("AAAAABcAAAAGAAAAAAAAABgAAAAGAAEAAAAAABkAAAAGAAIAAAABABcAAAAHAAAAAAABABgAAAAHAAEAAAABABkAAAAHAAIAAAACABcAAAAIAAAAAAACABgAAAAIAAEAAAACABkAAAAIAAIAAAADABcAAAAGAAAAAAADABgAAAAGAAEAAAADABkAAAAGAAIAAAAEABcAAAAHAAAAAAAEABgAAAAHAAEAAAAEABkAAAAHAAIAAAAFABcAAAAIAAAAAAAFABgAAAAIAAEAAAAFABkAAAAIAAIAAAAGABcAAAAGAAAAAAAGABgAAAAGAAEAAAAGABkAAAAGAAIAAAAHABcAAAAHAAAAAAAHABgAAAAHAAEAAAAHABkAAAAHAAIAAAAIABcAAAAIAAAAAAAIABgAAAAIAAEAAAAIABkAAAAIAAIAAAAMABcAAAAGAAAAAAAMABgAAAAGAAEAAAAMABkAAAAGAAIAAAANABcAAAAHAAAAAAANABgAAAAHAAEAAAANABkAAAAHAAIAAAAOABcAAAAIAAAAAAAOABgAAAAIAAEAAAAOABkAAAAIAAIAAAAPABcAAAAGAAAAAAAPABgAAAAGAAEAAAAPABkAAAAGAAIAAAAQABcAAAAHAAAAAAAQABgAAAAHAAEAAAAQABkAAAAHAAIAAAARABcAAAAIAAAAAAARABgAAAAIAAEAAAARABkAAAAIAAIAAAASABcAAAAGAAAAAAASABgAAAAGAAEAAAASABkAAAAGAAIAAAATABcAAAAHAAAAAAATABgAAAAHAAEAAAATABkAAAAHAAIAAAAUABcAAAAIAAAAAAAUABgAAAAIAAEAAAAUABkAAAAIAAIAAAA=")
+tile_set = ExtResource("1_o7ya6")
+script = ExtResource("1_f6f60")
+metadata/_custom_type_script = "uid://de0qurd6w0sdi"
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_0" unique_id=1886600958]
+script = ExtResource("3_yn8rc")
+metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
+
+[node name="tilemap_1" type="TileMapLayer" parent="." unique_id=754066882]
+tile_map_data = PackedByteArray("AAAJABcAAAARAAQAAAAJABgAAAARAAUAAAAJABkAAAARAAYAAAAKABcAAAASAAQAAAAKABgAAAASAAUAAAAKABkAAAASAAYAAAALABcAAAATAAQAAAALABgAAAATAAUAAAALABkAAAATAAYAAAA=")
+tile_set = ExtResource("1_o7ya6")
+script = ExtResource("1_f6f60")
+metadata/_custom_type_script = "uid://de0qurd6w0sdi"
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_1" unique_id=480062592]
+script = ExtResource("3_yn8rc")
+bit_index = 1
+metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
+
+[node name="Player" parent="." unique_id=1785403490 instance=ExtResource("3_m00k7")]
+position = Vector2(34, 323)
+scale = Vector2(0.25, 0.25)
