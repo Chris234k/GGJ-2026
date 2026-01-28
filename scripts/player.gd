@@ -36,3 +36,17 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = false
 	elif direction == -1:
 		animated_sprite_2d.flip_h = true
+
+
+# DEBUG ONLY - Remove before release
+# Toggle bits 0-3 with number keys 1-4
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_1:
+				print("DEBUG: Toggling bit 0, current mask: ", GameManager.get_binary_string())
+				GameManager.toggle_bit(0)
+				print("DEBUG: After toggle, mask: ", GameManager.get_binary_string())
+			KEY_2: GameManager.toggle_bit(1)
+			KEY_3: GameManager.toggle_bit(2)
+			KEY_4: GameManager.toggle_bit(3)
