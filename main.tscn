@@ -1,22 +1,7 @@
 [gd_scene format=3 uid="uid://bkcd4p0kgadrr"]
 
-[ext_resource type="PackedScene" uid="uid://g5n3b86meis3" path="res://npc/npc.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://olrlea7qi56" path="res://level/ground.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bbdx6rmfwjw5l" path="res://scenes/Levels/level_01.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node2D" unique_id=411968189]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=691321215]
-position = Vector2(1117, 203)
-zoom = Vector2(0.5, 0.5)
-
-[node name="Npc" parent="." unique_id=2014714834 instance=ExtResource("1_ig7tw")]
-position = Vector2(115, 192)
-
-[node name="Ground" parent="." unique_id=440286135 instance=ExtResource("2_0xm2m")]
-position = Vector2(257, 510)
-
-[node name="Ground2" parent="." unique_id=2019687451 instance=ExtResource("2_0xm2m")]
-position = Vector2(852, 596)
-
-[node name="Ground3" parent="." unique_id=734461870 instance=ExtResource("2_0xm2m")]
-position = Vector2(1849, 596)
+[node name="LevelRoot" parent="." unique_id=1123886121 instance=ExtResource("1_ig7tw")]
