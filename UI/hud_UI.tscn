@@ -1,0 +1,292 @@
+[gd_scene format=3 uid="uid://t3wnpot2m1d2"]
+
+[ext_resource type="Script" uid="uid://dc5q35abttbuu" path="res://UI/hud_ui.gd" id="1_is7uo"]
+
+[node name="HudUi" type="Control" unique_id=834537476]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_is7uo")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1017114272]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.07300001
+anchor_bottom = 0.136
+offset_left = 1054.0
+offset_top = -2.0
+offset_right = 1067.904
+offset_bottom = 7.871994
+grow_horizontal = 0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=987751711]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.07300001
+anchor_bottom = 0.136
+offset_left = 1054.0
+offset_top = 75.0
+offset_right = 1067.904
+offset_bottom = -11.128006
+grow_horizontal = 0
+color = Color(0.89059, 0.89059, 0.8905901, 1)
+
+[node name="Labels" type="GridContainer" parent="." unique_id=1440543874]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.739
+anchor_top = 0.043
+anchor_right = 0.952
+anchor_bottom = 0.21000001
+offset_left = 208.672
+offset_top = -27.864
+offset_right = 55.29602
+offset_bottom = -113.08
+grow_horizontal = 0
+columns = 4
+
+[node name="Label_3" type="RichTextLabel" parent="Labels" unique_id=2146611975]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "A
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Label_2" type="RichTextLabel" parent="Labels" unique_id=1709354704]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "S
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Label_1" type="RichTextLabel" parent="Labels" unique_id=1897227941]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "D
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Label_0" type="RichTextLabel" parent="Labels" unique_id=1086882521]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "F
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="CurrentBits" type="GridContainer" parent="." unique_id=829595734]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.739
+anchor_top = 0.043
+anchor_right = 0.952
+anchor_bottom = 0.21000001
+offset_left = 208.672
+offset_top = -2.8640003
+offset_right = 55.29602
+offset_bottom = -88.08
+grow_horizontal = 0
+columns = 4
+
+[node name="CurrentBit_3" type="RichTextLabel" parent="CurrentBits" unique_id=227894013]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=green]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="CurrentBit_2" type="RichTextLabel" parent="CurrentBits" unique_id=2003964797]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=green]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="CurrentBit_1" type="RichTextLabel" parent="CurrentBits" unique_id=1538120964]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=green]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="CurrentBit_0" type="RichTextLabel" parent="CurrentBits" unique_id=68901664]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=green]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Mask" type="GridContainer" parent="." unique_id=404642368]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.744
+anchor_top = 0.072000004
+anchor_right = 0.952
+anchor_bottom = 0.21000001
+offset_left = 203.08203
+offset_top = 3.343998
+offset_right = 55.466064
+offset_bottom = -63.079987
+grow_horizontal = 0
+columns = 4
+
+[node name="MaskBit_3" type="RichTextLabel" parent="Mask" unique_id=1604468453]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "0
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MaskBit_2" type="RichTextLabel" parent="Mask" unique_id=2046696481]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "0
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MaskBit_1" type="RichTextLabel" parent="Mask" unique_id=222470645]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "0
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MaskBit_0" type="RichTextLabel" parent="Mask" unique_id=1722912226]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "0
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Output" type="GridContainer" parent="." unique_id=365802616]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.744
+anchor_top = 0.072000004
+anchor_right = 0.952
+anchor_bottom = 0.21000001
+offset_left = 203.08203
+offset_top = 25.973995
+offset_right = 55.466064
+offset_bottom = -40.44993
+grow_horizontal = 0
+columns = 4
+
+[node name="Output_3" type="RichTextLabel" parent="Output" unique_id=447997963]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=cyan]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Output_2" type="RichTextLabel" parent="Output" unique_id=1395371308]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=cyan]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Output_1" type="RichTextLabel" parent="Output" unique_id=1280334236]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=cyan]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Output_0" type="RichTextLabel" parent="Output" unique_id=2077818031]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+bbcode_enabled = true
+text = "[color=cyan]0[/color]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="AND" type="Button" parent="." unique_id=1346044633]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.77000004
+anchor_right = 1.0
+anchor_bottom = 0.2
+offset_left = 87.95996
+offset_top = 33.0
+offset_right = -122.0
+offset_bottom = -65.600006
+grow_horizontal = 0
+tooltip_text = "Set Masked bits to 0"
+toggle_mode = true
+action_mode = 0
+text = "AND"
+
+[node name="OR" type="Button" parent="." unique_id=1466342298]
+custom_minimum_size = Vector2(40, 20)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.77000004
+anchor_right = 1.0
+anchor_bottom = 0.2
+offset_left = 30.269958
+offset_top = 33.0
+offset_right = -179.69
+offset_bottom = -65.600006
+grow_horizontal = 0
+tooltip_text = "Set Masked Bits to 1"
+toggle_mode = true
+action_mode = 0
+text = "OR"
