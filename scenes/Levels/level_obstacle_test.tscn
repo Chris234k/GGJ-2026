@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dwall00001" path="res://scenes/obstacles/wall.tscn" id="3_wall"]
 [ext_resource type="PackedScene" path="res://scenes/obstacles/spike.tscn" id="4_r5d3n"]
 [ext_resource type="PackedScene" path="res://scenes/respawn_point.tscn" id="5_y2ehk"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="6_cfpkn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hi2o"]
 texture = ExtResource("1_ix3yw")
@@ -183,7 +184,7 @@ position = Vector2(640, 630)
 invert_logic = true
 
 [node name="Spike" parent="." unique_id=907950423 instance=ExtResource("4_r5d3n")]
-position = Vector2(486, 518)
+position = Vector2(1165, 540)
 rotation = -1.5707964
 
 [node name="MaskableBehavior" parent="Spike" index="0"]
@@ -192,5 +193,17 @@ bit_index = 1
 [node name="RespawnPoint" parent="." unique_id=1263991365 instance=ExtResource("5_y2ehk")]
 position = Vector2(153, 520)
 
+[node name="Checkpoint" parent="." unique_id=233084375 instance=ExtResource("6_cfpkn")]
+position = Vector2(876.99994, 670)
+scale = Vector2(2.5125513, 3.0697668)
+
+[node name="Spike2" parent="." unique_id=501160674 instance=ExtResource("4_r5d3n")]
+position = Vector2(453, 552)
+rotation = -1.560763
+
+[node name="MaskableBehavior" parent="Spike2" index="0"]
+bit_index = 1
+
 [editable path="Wall"]
 [editable path="Spike"]
+[editable path="Spike2"]
