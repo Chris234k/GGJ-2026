@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd8d3rt5s7cm1"
-path="res://.godot/imported/Run (32x32).png-5cde35ddfb4f9d4c0e0886cd9381ad62.ctex"
+uid="uid://dtyvne327x3kn"
+path="res://.godot/imported/chip_walk_01_256x256.png-8d5194ca2c775d6de571a48636834fb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Images/Player/Run (32x32).png"
-dest_files=["res://.godot/imported/Run (32x32).png-5cde35ddfb4f9d4c0e0886cd9381ad62.ctex"]
+source_file="res://art/Images/Player/chip_walk_01_256x256.png"
+dest_files=["res://.godot/imported/chip_walk_01_256x256.png-8d5194ca2c775d6de571a48636834fb9.ctex"]
 
 [params]
 
