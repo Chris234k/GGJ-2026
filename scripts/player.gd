@@ -11,6 +11,10 @@ func _process(delta: float) -> void:
 	var is_jump = false
 	var pos: Vector2 = $GroundPos.global_position
 
+	# HACK: if we go too far down reload the level
+	if pos.y > 1000:
+		get_tree().reload_current_scene()
+
 	for tilemap in GameManager.level_tilemaps:
 		var local_pos := tilemap.to_local(pos)
 		var coords    := tilemap.local_to_map(local_pos)
