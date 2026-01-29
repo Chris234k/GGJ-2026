@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="4_kjy63"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="5_ukxb0"]
 
-[node name="game_01" type="Node2D" unique_id=2096551147]
+[node name="game_02" type="Node2D" unique_id=2096551147]
 
 [node name="level_config" type="Node" parent="." unique_id=885048635]
 script = ExtResource("1_6rymp")
