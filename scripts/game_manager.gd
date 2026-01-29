@@ -153,3 +153,11 @@ func heal_chip(amount: int = 1) -> void:
 
 func complete_level() -> void:
 	level_completed.emit()
+
+
+# --- Level ---
+
+var level_tilemaps: Array[TileMapLayer]
+
+func register_tilemaps(tilemaps: Array[TileMapLayer]) -> void:
+	level_tilemaps = tilemaps

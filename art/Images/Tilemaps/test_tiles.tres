@@ -2,6 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://wj83h8605qyi" path="res://art/Images/Tilemaps/Terrain (16x16).png" id="1_770vv"]
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_770vv"]
+tile_data = PackedInt32Array(0, 393216, 0, 65536, 393216, 1, 131072, 393216, 2, 1, 458752, 0, 65537, 458752, 1, 131073, 458752, 2, 2, 524288, 0, 65538, 524288, 1, 131074, 524288, 2)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_tgwx3"]
+tile_data = PackedInt32Array(0, 1114112, 4, 65536, 1114112, 5, 131072, 1114112, 6, 1, 1179648, 4, 65537, 1179648, 5, 131073, 1179648, 6, 2, 1245184, 4, 65538, 1245184, 5, 131074, 1245184, 6)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hi2o"]
 texture = ExtResource("1_770vv")
 0:0/0 = 0
@@ -218,12 +224,16 @@ texture = ExtResource("1_770vv")
 10:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:8/0 = 0
 12:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:8/0/custom_data_0 = 10.0
 13:8/0 = 0
 13:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:8/0/custom_data_0 = 10.0
 14:8/0 = 0
 14:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:8/0/custom_data_0 = 10.0
 15:8/0 = 0
 15:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:8/0/custom_data_0 = 10.0
 17:8/0 = 0
 17:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:8/0 = 0
@@ -254,12 +264,16 @@ texture = ExtResource("1_770vv")
 10:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:9/0 = 0
 12:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:9/0/custom_data_0 = 10.0
 13:9/0 = 0
 13:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:9/0/custom_data_0 = 10.0
 14:9/0 = 0
 14:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:9/0/custom_data_0 = 10.0
 15:9/0 = 0
 15:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:9/0/custom_data_0 = 10.0
 17:9/0 = 0
 17:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 18:9/0 = 0
@@ -282,10 +296,13 @@ texture = ExtResource("1_770vv")
 8:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:10/0 = 0
 13:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:10/0/custom_data_0 = 10.0
 14:10/0 = 0
 14:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:10/0/custom_data_0 = 10.0
 15:10/0 = 0
 15:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:10/0/custom_data_0 = 10.0
 18:10/0 = 0
 18:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 19:10/0 = 0
@@ -295,4 +312,8 @@ texture = ExtResource("1_770vv")
 
 [resource]
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "jump_force"
+custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_5hi2o")
+pattern_0 = SubResource("TileMapPattern_770vv")
+pattern_1 = SubResource("TileMapPattern_tgwx3")

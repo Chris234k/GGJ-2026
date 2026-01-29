@@ -5,6 +5,22 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 
+var jump_force := 0.0
+
+func _process(delta: float) -> void:
+	var is_jump = false
+	var pos: Vector2 = $GroundPos.global_position
+
+	for tilemap in GameManager.level_tilemaps:
+		var local_pos := tilemap.to_local(pos)
+		var coords    := tilemap.local_to_map(local_pos)
+		var data      := tilemap.get_cell_tile_data(coords)
+
+		if data:
+			jump_force = data.get_custom_data("jump_force")
+
+			if jump_force > 0:
+				return
 
 func _physics_process(delta: float) -> void:
 	# Animations
@@ -19,8 +35,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.animation = "Jump"
 
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and is_on_floor():
+	if jump_force > 0 and is_on_floor:
 		velocity.y = JUMP_VELOCITY
+		jump_force = 0
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
