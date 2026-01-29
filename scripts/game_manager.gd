@@ -50,6 +50,27 @@ var chip_health: int = 3:
 
 var chip_max_health: int = 3
 
+# --- Respawn ---
+var _respawn_point: Node2D = null
+var _player: CharacterBody2D = null
+
+func register_respawn_point(point: Node2D) -> void:
+	_respawn_point = point
+
+func register_player(player: CharacterBody2D) -> void:
+	_player = player
+
+func get_respawn_position() -> Vector2:
+	if _respawn_point:
+		return _respawn_point.global_position
+	push_warning("GameManager: No respawn point registered, using origin")
+	return Vector2.ZERO
+
+func kill_chip() -> void:
+	chip_died.emit()
+	if _player and _player.has_method("respawn"):
+		_player.respawn(get_respawn_position())
+
 # --- Progress ---
 var current_level: int = 1
 

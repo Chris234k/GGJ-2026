@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://wj83h8605qyi" path="res://art/Images/Tilemaps/Terrain (16x16).png" id="1_ix3yw"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="2_5hi2o"]
 [ext_resource type="PackedScene" uid="uid://dwall00001" path="res://scenes/obstacles/wall.tscn" id="3_wall"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/spike.tscn" id="4_r5d3n"]
+[ext_resource type="PackedScene" path="res://scenes/respawn_point.tscn" id="5_y2ehk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hi2o"]
 texture = ExtResource("1_ix3yw")
@@ -180,4 +182,15 @@ position = Vector2(640, 630)
 [node name="MaskableBehavior" parent="Wall" index="0"]
 invert_logic = true
 
+[node name="Spike" parent="." unique_id=907950423 instance=ExtResource("4_r5d3n")]
+position = Vector2(486, 518)
+rotation = -1.5707964
+
+[node name="MaskableBehavior" parent="Spike" index="0"]
+bit_index = 1
+
+[node name="RespawnPoint" parent="." unique_id=1263991365 instance=ExtResource("5_y2ehk")]
+position = Vector2(153, 520)
+
 [editable path="Wall"]
+[editable path="Spike"]

@@ -6,14 +6,22 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -850.0
 
 var jump_force := 0.0
+var _is_dead := false
+
+func _ready() -> void:
+	GameManager.register_player(self)
 
 func _process(delta: float) -> void:
+	if _is_dead:
+		return
+
 	var is_jump = false
 	var pos: Vector2 = $GroundPos.global_position
 
 	# HACK: if we go too far down reload the level
 	if pos.y > 1000:
-		get_tree().reload_current_scene()
+		GameManager.kill_chip()
+		return
 
 	for tilemap in GameManager.level_tilemaps:
 		var local_pos := tilemap.to_local(pos)
@@ -27,12 +35,15 @@ func _process(delta: float) -> void:
 				return
 
 func _physics_process(delta: float) -> void:
+	if _is_dead:
+		return
+
 	# Animations
 	if velocity.x > 1 or velocity.x < -1:
 		animated_sprite_2d.animation = "Run"
 	else:
 		animated_sprite_2d.animation = "Idle"
-		
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -52,11 +63,35 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	
+
 	if direction == 1:
 		animated_sprite_2d.flip_h = false
 	elif direction == -1:
 		animated_sprite_2d.flip_h = true
+
+
+func die() -> void:
+	GameManager.kill_chip()
+
+func respawn(spawn_position: Vector2) -> void:
+	_is_dead = true
+	velocity = Vector2.ZERO
+
+	# Death flash effect
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.RED, 0.1)
+	tween.tween_property(animated_sprite_2d, "modulate", Color.TRANSPARENT, 0.1)
+	tween.tween_callback(_do_respawn.bind(spawn_position))
+
+func _do_respawn(spawn_position: Vector2) -> void:
+	global_position = spawn_position
+	velocity = Vector2.ZERO
+	jump_force = 0
+	_is_dead = false
+
+	# Fade back in
+	var tween = create_tween()
+	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.15)
 
 
 # DEBUG ONLY - Remove before release
