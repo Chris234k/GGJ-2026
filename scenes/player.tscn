@@ -112,3 +112,6 @@ autoplay = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128497729]
 position = Vector2(-5, 25)
 shape = SubResource("RectangleShape2D_jej6c")
+
+[node name="GroundPos" type="Node2D" parent="." unique_id=1950765224]
+position = Vector2(-1, 131)

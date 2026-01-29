@@ -35,7 +35,7 @@ func _ready() -> void:
 		return
 
 	# Store callable for disconnect/reconnect during deactivation
-	_cleanup_callable = GameManager._on_registered_object_exiting.bind(bit_index)
+	_cleanup_callable = GameManager._on_registered_object_exiting.bind(bit_index, self)
 	GameManager.register_object(bit_index, self)
 
 ## Called by GameManager when this bit changes

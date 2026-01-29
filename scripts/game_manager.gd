@@ -10,6 +10,7 @@ signal chip_health_changed(new_health: int)
 signal chip_died
 signal level_completed
 signal max_bits_changed(new_max: int)
+signal checkpoint_activated(checkpoint: Node2D)
 
 # --- Bitmask State ---
 ## The current bitmask controlling level objects.
@@ -36,7 +37,8 @@ var max_bits: int = 4:
 		max_bits_changed.emit(max_bits)
 
 # --- Object Registry ---
-## Maps bit_index -> registered object (Node)
+## Maps bit_index -> Array of registered objects (Nodes)
+## Multiple objects can share the same bit index.
 ## Objects must implement: on_bit_changed(enabled: bool)
 var _registered_objects: Dictionary = {}
 
@@ -49,6 +51,41 @@ var chip_health: int = 3:
 			chip_died.emit()
 
 var chip_max_health: int = 3
+
+# --- Respawn ---
+var _respawn_point: Node2D = null
+var _initial_respawn_point: Node2D = null
+var _player: CharacterBody2D = null
+
+## Register a respawn point. If is_initial is true, also stores as the initial
+## spawn point for level resets.
+func register_respawn_point(point: Node2D, is_initial: bool = false) -> void:
+	_respawn_point = point
+	if is_initial:
+		_initial_respawn_point = point
+	elif _initial_respawn_point != null and point != _initial_respawn_point:
+		# This is a checkpoint activation
+		checkpoint_activated.emit(point)
+
+func register_player(player: CharacterBody2D) -> void:
+	_player = player
+
+func get_respawn_position() -> Vector2:
+	if _respawn_point:
+		return _respawn_point.global_position
+	push_warning("GameManager: No respawn point registered, using origin")
+	return Vector2.ZERO
+
+func kill_chip() -> void:
+	chip_died.emit()
+	if _player and _player.has_method("respawn"):
+		_player.respawn(get_respawn_position())
+
+## Reset the respawn point to the initial spawn point.
+## Call this on level reset to clear checkpoint progress.
+func reset_checkpoints() -> void:
+	if _initial_respawn_point:
+		_respawn_point = _initial_respawn_point
 
 # --- Progress ---
 var current_level: int = 1
@@ -92,57 +129,91 @@ func get_binary_string() -> String:
 
 ## Register an object to a specific bit index.
 ## The object should implement: on_bit_changed(enabled: bool)
-## Returns true if registration succeeded, false if bit already taken.
+## Multiple objects can register to the same bit index.
 func register_object(bit_index: int, object: Node) -> bool:
 	if bit_index < 0 or bit_index >= max_bits:
 		push_error("GameManager: bit_index %d out of range (0-%d)" % [bit_index, max_bits - 1])
 		return false
 
-	if _registered_objects.has(bit_index):
-		push_warning("GameManager: bit %d already has a registered object, replacing" % bit_index)
+	# Create array for this bit if it doesn't exist
+	if not _registered_objects.has(bit_index):
+		_registered_objects[bit_index] = []
 
-	_registered_objects[bit_index] = object
+	# Add object to the array (avoid duplicates)
+	var objects_array: Array = _registered_objects[bit_index]
+	if object not in objects_array:
+		objects_array.append(object)
 
-	# Immediately notify the object of current state
-	_notify_registered_object(bit_index, is_bit_set(bit_index))
+	# Immediately notify this object of current state
+	if object.has_method("on_bit_changed"):
+		object.on_bit_changed(is_bit_set(bit_index))
 
 	# Auto-unregister when object is freed
-	if not object.tree_exiting.is_connected(_on_registered_object_exiting.bind(bit_index)):
-		object.tree_exiting.connect(_on_registered_object_exiting.bind(bit_index))
+	var cleanup_callable = _on_registered_object_exiting.bind(bit_index, object)
+	if not object.tree_exiting.is_connected(cleanup_callable):
+		object.tree_exiting.connect(cleanup_callable)
 
 	return true
 
-## Unregister an object from its bit index.
-func unregister_object(bit_index: int) -> void:
-	_registered_objects.erase(bit_index)
+## Unregister a specific object from its bit index.
+func unregister_object(bit_index: int, object: Node = null) -> void:
+	if not _registered_objects.has(bit_index):
+		return
 
-## Get the object registered to a bit index (or null).
+	if object == null:
+		# Remove all objects at this bit index
+		_registered_objects.erase(bit_index)
+	else:
+		# Remove specific object from array
+		var objects_array: Array = _registered_objects[bit_index]
+		objects_array.erase(object)
+		# Clean up empty arrays
+		if objects_array.is_empty():
+			_registered_objects.erase(bit_index)
+
+## Get the first object registered to a bit index (or null).
 func get_registered_object(bit_index: int) -> Node:
-	return _registered_objects.get(bit_index)
+	if not _registered_objects.has(bit_index):
+		return null
+	var objects_array: Array = _registered_objects[bit_index]
+	if objects_array.is_empty():
+		return null
+	return objects_array[0]
+
+## Get all objects registered to a bit index.
+func get_registered_objects(bit_index: int) -> Array:
+	if not _registered_objects.has(bit_index):
+		return []
+	return _registered_objects[bit_index]
 
 ## Called by a registered object to flip its own bit.
 ## Use this when something in the world affects the bit (e.g., bomb destroys obstacle).
 func object_requests_bit_change(bit_index: int, enabled: bool) -> void:
 	set_bit(bit_index, enabled)
 
-## Internal: notify a registered object of its bit state change.
+## Internal: notify all registered objects at a bit index of state change.
 func _notify_registered_object(bit_index: int, enabled: bool) -> void:
-	var object = _registered_objects.get(bit_index)
-	if object and is_instance_valid(object) and object.has_method("on_bit_changed"):
-		object.on_bit_changed(enabled)
+	if not _registered_objects.has(bit_index):
+		return
+	var objects_array: Array = _registered_objects[bit_index]
+	for object in objects_array:
+		if is_instance_valid(object) and object.has_method("on_bit_changed"):
+			object.on_bit_changed(enabled)
 
 ## Internal: auto-cleanup when registered object leaves tree.
-func _on_registered_object_exiting(bit_index: int) -> void:
-	_registered_objects.erase(bit_index)
+func _on_registered_object_exiting(bit_index: int, object: Node) -> void:
+	unregister_object(bit_index, object)
 
 # --- Game Flow ---
 
-func reset_level() -> void:
+func reset_level(reset_checkpoint_progress: bool = false) -> void:
 	bitmask = 0
 	chip_health = chip_max_health
+	if reset_checkpoint_progress:
+		reset_checkpoints()
 
 func reset_game() -> void:
-	reset_level()
+	reset_level(true)
 	current_level = 1
 
 func damage_chip(amount: int = 1) -> void:
@@ -153,3 +224,22 @@ func heal_chip(amount: int = 1) -> void:
 
 func complete_level() -> void:
 	level_completed.emit()
+
+
+# --- Level Tilemaps ---
+
+var level_tilemaps: Array[TileMapLayer]
+
+## Register a single tilemap for tile data checking (is_deadly, jump_force, etc.)
+func register_tilemap(tilemap: TileMapLayer) -> void:
+	if tilemap not in level_tilemaps:
+		level_tilemaps.append(tilemap)
+
+## Unregister a tilemap (call when tilemap exits tree)
+func unregister_tilemap(tilemap: TileMapLayer) -> void:
+	level_tilemaps.erase(tilemap)
+
+## Bulk register (kept for backwards compatibility)
+func register_tilemaps(tilemaps: Array[TileMapLayer]) -> void:
+	for tilemap in tilemaps:
+		register_tilemap(tilemap)
