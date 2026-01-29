@@ -24,6 +24,10 @@ func _process(delta: float) -> void:
 		return
 
 	for tilemap in GameManager.level_tilemaps:
+		# Skip disabled tilemaps (toggled off via bitmask)
+		if not tilemap.enabled:
+			continue
+
 		var local_pos := tilemap.to_local(pos)
 		var coords    := tilemap.local_to_map(local_pos)
 		var data      := tilemap.get_cell_tile_data(coords)
@@ -32,6 +36,12 @@ func _process(delta: float) -> void:
 			jump_force = data.get_custom_data("jump_force")
 
 			if jump_force > 0:
+				return
+
+			# Check for deadly tiles
+			var is_deadly = data.get_custom_data("is_deadly")
+			if is_deadly:
+				die()
 				return
 
 func _physics_process(delta: float) -> void:
@@ -103,6 +113,12 @@ func _input(event: InputEvent) -> void:
 				print("DEBUG: Toggling bit 0, current mask: ", GameManager.get_binary_string())
 				GameManager.toggle_bit(0)
 				print("DEBUG: After toggle, mask: ", GameManager.get_binary_string())
-			KEY_2: GameManager.toggle_bit(1)
-			KEY_3: GameManager.toggle_bit(2)
-			KEY_4: GameManager.toggle_bit(3)
+			KEY_2:
+				print("DEBUG: Toggling bit 1")
+				GameManager.toggle_bit(1)
+			KEY_3:
+				print("DEBUG: Toggling bit 2")
+				GameManager.toggle_bit(2)
+			KEY_4:
+				print("DEBUG: Toggling bit 3")
+				GameManager.toggle_bit(3)

@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" path="res://scenes/obstacles/spike.tscn" id="4_r5d3n"]
 [ext_resource type="PackedScene" path="res://scenes/respawn_point.tscn" id="5_y2ehk"]
 [ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="6_cfpkn"]
+[ext_resource type="TileSet" uid="uid://b4spg8mi60jqv" path="res://art/Images/Tilemaps/test_tiles.tres" id="7_gunpn"]
+[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="8_323q8"]
+[ext_resource type="Script" uid="uid://cav56ej2travj" path="res://scripts/maskable_behavior.gd" id="9_0qkon"]
+[ext_resource type="Script" uid="uid://cep63iec2pfso" path="res://scripts/level_config.gd" id="10_lvlcfg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hi2o"]
 texture = ExtResource("1_ix3yw")
@@ -169,10 +173,25 @@ sources/0 = SubResource("TileSetAtlasSource_5hi2o")
 
 [node name="LevelRoot" type="Node2D" unique_id=410381435]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1275614353]
+[node name="level_config" type="Node" parent="." unique_id=1753369487]
+script = ExtResource("10_lvlcfg")
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1275614353]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAAAAAAAAAGAAkAAAAAAAEAAAAGAAkAAAAAAAIAAAAGAAkAAAAAAAMAAAAGAAkAAAAAAAQAAAAGAAkAAAAAAAUAAAAGAAkAAAAAAAYAAAAGAAkAAAAAAAcAAAAGAAkAAAAAAAgAAAAGAAkAAAAAAAkAAAAGAAkAAAAAAAoAAAAGAAkAAAAAAAsAAAAGAAkAAAAAAAwAAAAGAAkAAAAAAA0AAAAGAAkAAAAAAA4AAAAGAAkAAAABAA4AAAAHAAkAAAACAA4AAAAHAAkAAAADAA4AAAAHAAkAAAAEAA4AAAAHAAkAAAAFAA4AAAAHAAkAAAAGAA4AAAAHAAkAAAAHAA4AAAAHAAkAAAAIAA4AAAAHAAkAAAAJAA4AAAAHAAkAAAAKAA4AAAAHAAkAAAALAA4AAAAHAAkAAAAMAA4AAAAHAAkAAAANAA4AAAAHAAkAAAAOAA4AAAAHAAkAAAAPAA4AAAAHAAkAAAAQAA4AAAAHAAkAAAARAA4AAAAHAAkAAAASAA4AAAAHAAkAAAATAA4AAAAHAAkAAAAUAA4AAAAHAAkAAAAVAA4AAAAHAAkAAAAWAA4AAAAHAAkAAAAXAA4AAAAHAAkAAAAYAA4AAAAHAAkAAAAZAA4AAAAHAAkAAAAaAA4AAAAIAAkAAAAaAA0AAAAIAAkAAAAaAAwAAAAIAAkAAAAaAAsAAAAIAAkAAAAaAAoAAAAIAAkAAAAaAAkAAAAIAAkAAAAaAAgAAAAIAAkAAAAaAAcAAAAIAAkAAAAaAAYAAAAIAAkAAAAaAAUAAAAIAAkAAAAaAAQAAAAIAAkAAAAaAAMAAAAIAAkAAAAaAAIAAAAIAAkAAAAaAAEAAAAIAAkAAAAaAAAAAAAIAAkAAAABAAAAAAAHAAkAAAACAAAAAAAHAAkAAAADAAAAAAAHAAkAAAAEAAAAAAAHAAkAAAAFAAAAAAAHAAkAAAAGAAAAAAAHAAkAAAAHAAAAAAAHAAkAAAAIAAAAAAAHAAkAAAAJAAAAAAAHAAkAAAAKAAAAAAAHAAkAAAALAAAAAAAHAAkAAAAMAAAAAAAHAAkAAAANAAAAAAAHAAkAAAAOAAAAAAAHAAkAAAAPAAAAAAAHAAkAAAAQAAAAAAAHAAkAAAARAAAAAAAHAAkAAAASAAAAAAAHAAkAAAATAAAAAAAHAAkAAAAUAAAAAAAHAAkAAAAVAAAAAAAHAAkAAAAWAAAAAAAHAAkAAAAXAAAAAAAHAAkAAAAYAAAAAAAHAAkAAAAZAAAAAAAHAAkAAAA=")
 tile_set = SubResource("TileSet_2nt6v")
+
+[node name="TileMapKill" type="TileMapLayer" parent="." unique_id=348484570]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAMAA4AAAARAAgAAAANAA4AAAASAAgAAAAOAA4AAAATAAgAAAA=")
+tile_set = ExtResource("7_gunpn")
+script = ExtResource("8_323q8")
+metadata/_custom_type_script = "uid://bkync7mhgcj7x"
+
+[node name="MaskableBehavior" type="Node" parent="TileMapKill" unique_id=1318022209]
+script = ExtResource("9_0qkon")
+bit_index = 2
+metadata/_custom_type_script = "uid://cav56ej2travj"
 
 [node name="Player" parent="." unique_id=927358275 instance=ExtResource("2_5hi2o")]
 position = Vector2(155, 542)

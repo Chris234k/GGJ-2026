@@ -226,9 +226,20 @@ func complete_level() -> void:
 	level_completed.emit()
 
 
-# --- Level ---
+# --- Level Tilemaps ---
 
 var level_tilemaps: Array[TileMapLayer]
 
+## Register a single tilemap for tile data checking (is_deadly, jump_force, etc.)
+func register_tilemap(tilemap: TileMapLayer) -> void:
+	if tilemap not in level_tilemaps:
+		level_tilemaps.append(tilemap)
+
+## Unregister a tilemap (call when tilemap exits tree)
+func unregister_tilemap(tilemap: TileMapLayer) -> void:
+	level_tilemaps.erase(tilemap)
+
+## Bulk register (kept for backwards compatibility)
 func register_tilemaps(tilemaps: Array[TileMapLayer]) -> void:
-	level_tilemaps = tilemaps
+	for tilemap in tilemaps:
+		register_tilemap(tilemap)
