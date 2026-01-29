@@ -11,11 +11,10 @@ var _is_dead := false
 func _ready() -> void:
 	GameManager.register_player(self)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _is_dead:
 		return
 
-	var is_jump = false
 	var pos: Vector2 = $GroundPos.global_position
 
 	# HACK: if we go too far down reload the level
@@ -33,12 +32,11 @@ func _process(delta: float) -> void:
 		var data      := tilemap.get_cell_tile_data(coords)
 
 		if data:
-			jump_force = data.get_custom_data("jump_force")
-
-			if jump_force > 0:
+			var jf = data.get_custom_data("jump_force")
+			if jf != null and jf > 0:
+				jump_force = jf
 				return
 
-			# Check for deadly tiles
 			var is_deadly = data.get_custom_data("is_deadly")
 			if is_deadly:
 				die()
