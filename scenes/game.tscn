@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://cj4tufd00rsoa"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://c73lgindfde0v" path="res://scripts/game.gd" id="1_game"]
 [ext_resource type="PackedScene" uid="uid://bq8b1hv10jtr0" path="res://scenes/gameplay/game_01.tscn" id="2_g01"]
 [ext_resource type="PackedScene" uid="uid://bl0n0th1n7nro" path="res://scenes/gameplay/game_02.tscn" id="3_g02"]
 [ext_resource type="PackedScene" uid="uid://bxflihtj3hdfj" path="res://scenes/gameplay/game_03.tscn" id="4_g03"]
+[ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_04.tscn" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="6_p57ef"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" unique_id=1282430220]
 script = ExtResource("1_game")
-level_scenes = Array[PackedScene]([ExtResource("2_g01"), ExtResource("3_g02"), ExtResource("4_g03")])
+level_scenes = Array[PackedScene]([ExtResource("2_g01"), ExtResource("3_g02"), ExtResource("4_g03"), ExtResource("5_iywne")])
 
-[node name="LevelSlot" type="Node" parent="."]
+[node name="LevelSlot" type="Node" parent="." unique_id=337242142]
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=21999873]
 layer = 10
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=572198820]
+stream = ExtResource("6_p57ef")
+autoplay = true

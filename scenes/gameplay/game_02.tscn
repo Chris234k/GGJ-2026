@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://bl0n0th1n7nro"]
 
-[ext_resource type="Script" uid="uid://cep63iec2pfso" path="res://scripts/level_config.gd" id="1_6rymp"]
+[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_6rymp"]
 [ext_resource type="Texture2D" uid="uid://b8fd6qd0g07mb" path="res://art/Images/Backgrounds/bg_03_gradient.png" id="2_jmccq"]
-[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="3_jmccq"]
+[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="3_jmccq"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="3_psjsu"]
-[ext_resource type="Script" uid="uid://cav56ej2travj" path="res://scripts/maskable_behavior.gd" id="4_kjy63"]
+[ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="4_kjy63"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="5_ukxb0"]
 
 [node name="game_02" type="Node2D" unique_id=2096551147]
@@ -22,12 +22,12 @@ scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("2_jmccq")
 
 [node name="tilemap_always" type="TileMapLayer" parent="." unique_id=298539414]
-tile_map_data = PackedByteArray("AAAsAA4AAAAJAAkAAAA=")
+tile_map_data = PackedByteArray("AAAsAA4AAAAJAAkAAAArABAAAAAJAAkAAAAsABAAAAAJAAkAAAAtABAAAAAJAAkAAAAqABAAAAAJAAkAAAA=")
 tile_set = ExtResource("3_psjsu")
 script = ExtResource("3_jmccq")
 
 [node name="tilemap_0" type="TileMapLayer" parent="." unique_id=840074273]
-tile_map_data = PackedByteArray("AAAAABcAAAAJAAUAAAANABcAAAAKAAUAAAAOABcAAAAKAAUAAAAPABcAAAAKAAUAAAAQABcAAAAKAAUAAAARABcAAAALAAUAAAAjABAAAAAJAAUAAAAkABAAAAAKAAUAAAAlABAAAAAKAAUAAAAmABAAAAAKAAUAAAAnABAAAAAKAAUAAAAoABAAAAAKAAUAAAApABAAAAAJAAkAAAAqABAAAAAJAAkAAAArABAAAAAJAAkAAAAsABAAAAAKAAUAAAAtABAAAAALAAUAAAABABcAAAAKAAUAAAACABcAAAAKAAUAAAADABcAAAAKAAUAAAAEABcAAAAKAAUAAAAFABcAAAAKAAUAAAAGABcAAAAKAAUAAAAHABcAAAAKAAUAAAAIABcAAAAKAAUAAAAJABcAAAAKAAUAAAAKABcAAAAKAAUAAAALABcAAAAKAAUAAAAMABcAAAAKAAUAAAA=")
+tile_map_data = PackedByteArray("AAAAABcAAAAJAAUAAAANABcAAAAKAAUAAAAOABcAAAAKAAUAAAAPABcAAAAKAAUAAAAQABcAAAAKAAUAAAARABcAAAALAAUAAAAjABAAAAAJAAUAAAAkABAAAAAKAAUAAAAlABAAAAAKAAUAAAAmABAAAAAKAAUAAAAnABAAAAAKAAUAAAAoABAAAAAKAAUAAAApABAAAAAKAAUAAAAqABAAAAAKAAUAAAArABAAAAAKAAUAAAAsABAAAAAKAAUAAAAtABAAAAALAAUAAAABABcAAAAKAAUAAAACABcAAAAKAAUAAAADABcAAAAKAAUAAAAEABcAAAAKAAUAAAAFABcAAAAKAAUAAAAGABcAAAAKAAUAAAAHABcAAAAKAAUAAAAIABcAAAAKAAUAAAAJABcAAAAKAAUAAAAKABcAAAAKAAUAAAALABcAAAAKAAUAAAAMABcAAAAKAAUAAAA=")
 tile_set = ExtResource("3_psjsu")
 script = ExtResource("3_jmccq")
 

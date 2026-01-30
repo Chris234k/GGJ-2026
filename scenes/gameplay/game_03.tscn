@@ -24,7 +24,7 @@ scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("2_mjmww")
 
 [node name="tilemap_always" type="TileMapLayer" parent="." unique_id=548475757]
-tile_map_data = PackedByteArray("AAATABUAAAAJAAkAAAA=")
+tile_map_data = PackedByteArray("AAATABUAAAAJAAkAAAARABcAAAAJAAkAAAASABcAAAAJAAkAAAATABcAAAAJAAkAAAAUABcAAAAJAAkAAAA=")
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
 metadata/_custom_type_script = "uid://de0qurd6w0sdi"

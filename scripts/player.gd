@@ -55,10 +55,11 @@ func _process(_delta: float) -> void:
 				die()
 				return
 
-			var is_goal = data.get_custom_data("is_goal")
-			if is_goal:
-				GameManager.complete_level()
-				return
+			if is_player:
+				var is_goal = data.get_custom_data("is_goal")
+				if is_goal:
+					GameManager.complete_level()
+					return
 
 func _physics_process(delta: float) -> void:
 	if _is_dead:
