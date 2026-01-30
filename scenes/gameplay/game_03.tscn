@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://bxflihtj3hdfj"]
 
-[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_op662"]
+[ext_resource type="Script" uid="uid://hyfxev4bon38" path="res://scripts/level_config.gd" id="1_op662"]
 [ext_resource type="Texture2D" uid="uid://b8fd6qd0g07mb" path="res://art/Images/Backgrounds/bg_03_gradient.png" id="2_mjmww"]
-[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="3_mjmww"]
+[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="3_mjmww"]
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="4_80npk"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="5_mjmww"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="5_sw5ro"]
@@ -13,13 +13,12 @@
 script = ExtResource("1_op662")
 bit_0 = true
 bit_1 = true
-metadata/_custom_type_script = "uid://cmnmdmgutt0t0"
 
 [node name="BackgroundLayer" type="Parallax2D" parent="." unique_id=385108093]
 scroll_scale = Vector2(0.1, 0.1)
 
 [node name="BackgroundImage" type="Sprite2D" parent="BackgroundLayer" unique_id=200932813]
-position = Vector2(656, 313)
+position = Vector2(599, 313)
 scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("2_mjmww")
 
@@ -27,13 +26,11 @@ texture = ExtResource("2_mjmww")
 tile_map_data = PackedByteArray("AAATABUAAAAJAAkAAAARABcAAAAJAAkAAAASABcAAAAJAAkAAAATABcAAAAJAAkAAAAUABcAAAAJAAkAAAA=")
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="tilemap_0" type="TileMapLayer" parent="." unique_id=840074273]
 tile_map_data = PackedByteArray("AAAAABcAAAAJAAUAAAABABcAAAAKAAUAAAACABcAAAAKAAUAAAADABcAAAAKAAUAAAAEABcAAAAKAAUAAAAFABcAAAAKAAUAAAAGABcAAAAKAAUAAAAHABcAAAAKAAUAAAAIABcAAAAKAAUAAAAMABcAAAAKAAUAAAANABcAAAAKAAUAAAAOABcAAAAKAAUAAAAPABcAAAAKAAUAAAAQABcAAAAKAAUAAAARABcAAAAKAAUAAAASABcAAAAKAAUAAAATABcAAAAKAAUAAAAUABcAAAALAAUAAAAJABcAAAAKAAUAAAAKABcAAAAKAAUAAAALABcAAAAKAAUAAAA=")
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_0" unique_id=1886600958]
 script = ExtResource("4_80npk")
@@ -43,7 +40,6 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 tile_map_data = PackedByteArray("AAAJABQAAAAPAAYAAAAJABUAAAAPAAYAAAAJABYAAAAPAAUAAAAKABQAAAAPAAYAAAAKABUAAAAPAAYAAAAKABYAAAAPAAUAAAALABQAAAAPAAYAAAALABUAAAAPAAYAAAALABYAAAAPAAUAAAAJABEAAAAPAAYAAAAJABIAAAAPAAYAAAAJABMAAAAPAAYAAAAKABEAAAAPAAYAAAAKABIAAAAPAAYAAAAKABMAAAAPAAYAAAALABEAAAAPAAYAAAALABIAAAAPAAYAAAALABMAAAAPAAYAAAAJAA4AAAAPAAYAAAAJAA8AAAAPAAYAAAAJABAAAAAPAAYAAAAKAA4AAAAPAAYAAAAKAA8AAAAPAAYAAAAKABAAAAAPAAYAAAALAA4AAAAPAAYAAAALAA8AAAAPAAYAAAALABAAAAAPAAYAAAAJAAsAAAAPAAUAAAAJAAwAAAAPAAYAAAAJAA0AAAAPAAYAAAAKAAsAAAAPAAUAAAAKAAwAAAAPAAYAAAAKAA0AAAAPAAYAAAALAAsAAAAPAAUAAAALAAwAAAAPAAYAAAALAA0AAAAPAAYAAAA=")
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_1" unique_id=480062592]
 script = ExtResource("4_80npk")
@@ -54,7 +50,6 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 position = Vector2(-2, 0)
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_2" unique_id=985530628]
 script = ExtResource("4_80npk")
@@ -65,7 +60,6 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 position = Vector2(-2, 0)
 tile_set = ExtResource("5_mjmww")
 script = ExtResource("3_mjmww")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_3" unique_id=1700973923]
 script = ExtResource("4_80npk")

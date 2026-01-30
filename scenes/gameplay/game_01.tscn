@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bq8b1hv10jtr0"]
 
-[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_1j2ip"]
-[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="1_f6f60"]
+[ext_resource type="Script" uid="uid://hyfxev4bon38" path="res://scripts/level_config.gd" id="1_1j2ip"]
+[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="1_f6f60"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="2_ye5oi"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="3_m00k7"]
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="3_yn8rc"]
@@ -17,7 +17,7 @@ bit_0 = true
 scroll_scale = Vector2(0.1, 0.1)
 
 [node name="BackgroundImage" type="Sprite2D" parent="BackgroundLayer" unique_id=1749065152]
-position = Vector2(656, 313)
+position = Vector2(599, 313)
 scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("6_ye5oi")
 
