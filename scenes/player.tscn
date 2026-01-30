@@ -168,7 +168,7 @@ script = ExtResource("1_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1872029367]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dt7fs")
-animation = &"Die"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128497729]
@@ -179,4 +179,5 @@ shape = SubResource("RectangleShape2D_jej6c")
 position = Vector2(-1, 131)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1741698923]
+offset = Vector2(150, 0)
 zoom = Vector2(2, 2)

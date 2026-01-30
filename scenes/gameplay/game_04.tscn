@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://clpcwb8xlc0b2"]
 
-[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_65o7n"]
+[ext_resource type="Script" uid="uid://hyfxev4bon38" path="res://scripts/level_config.gd" id="1_65o7n"]
 [ext_resource type="Texture2D" uid="uid://b8fd6qd0g07mb" path="res://art/Images/Backgrounds/bg_03_gradient.png" id="2_bkwqv"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="3_nop7c"]
-[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="4_ke4gj"]
+[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="4_ke4gj"]
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="5_yoidn"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="6_05vrn"]
 [ext_resource type="PackedScene" uid="uid://du1tfrcaymbra" path="res://scenes/enemy.tscn" id="7_bkwqv"]
@@ -14,13 +14,12 @@
 script = ExtResource("1_65o7n")
 bit_0 = true
 bit_1 = true
-metadata/_custom_type_script = "uid://cmnmdmgutt0t0"
 
 [node name="BackgroundLayer" type="Parallax2D" parent="." unique_id=385108093]
 scroll_scale = Vector2(0.1, 0.1)
 
 [node name="BackgroundImage" type="Sprite2D" parent="BackgroundLayer" unique_id=200932813]
-position = Vector2(656, 313)
+position = Vector2(599, 313)
 scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("2_bkwqv")
 
@@ -28,13 +27,11 @@ texture = ExtResource("2_bkwqv")
 tile_map_data = PackedByteArray("AAAaABoAAAAJAAkAAAAYABwAAAAJAAkAAAAZABwAAAAJAAkAAAAaABwAAAAJAAkAAAAbABwAAAAJAAkAAAA=")
 tile_set = ExtResource("3_nop7c")
 script = ExtResource("4_ke4gj")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="tilemap_0" type="TileMapLayer" parent="." unique_id=840074273]
 tile_map_data = PackedByteArray("AAACABcAAAAKAAUAAAABABcAAAAJAAUAAAAAABcAAAAJAAUAAAAHABcAAAALAAUAAAADABcAAAAKAAUAAAAEABcAAAAKAAUAAAAGABcAAAAKAAUAAAAFABcAAAAKAAUAAAAVABcAAAAJAAUAAAAWABcAAAAJAAUAAAAXABcAAAAKAAUAAAAYABcAAAAKAAUAAAAZABcAAAAKAAUAAAAaABcAAAAKAAUAAAAbABcAAAAKAAUAAAAcABcAAAALAAUAAAAWABwAAAAKAAUAAAAVABwAAAAJAAUAAAAXABwAAAAKAAUAAAAYABwAAAAKAAUAAAAZABwAAAAKAAUAAAAaABwAAAAKAAUAAAAbABwAAAALAAUAAAA=")
 tile_set = ExtResource("3_nop7c")
 script = ExtResource("4_ke4gj")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_0" unique_id=1886600958]
 script = ExtResource("5_yoidn")
@@ -44,7 +41,6 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 tile_map_data = PackedByteArray("AAAHABYAAAAPAAYAAAAHABUAAAAPAAYAAAAHABQAAAAPAAYAAAAHABMAAAAPAAYAAAAHABIAAAAPAAYAAAAVABYAAAAPAAYAAAAVABUAAAAPAAYAAAAVABQAAAAPAAYAAAAVABMAAAAPAAYAAAAVABIAAAAPAAYAAAA=")
 tile_set = ExtResource("3_nop7c")
 script = ExtResource("4_ke4gj")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_1" unique_id=480062592]
 script = ExtResource("5_yoidn")
@@ -56,7 +52,6 @@ position = Vector2(-2, 0)
 tile_map_data = PackedByteArray("AAAIABwAAAAJAAgAAAAIAB0AAAAJAAgAAAAJABwAAAAJAAgAAAAJAB0AAAAJAAgAAAAKABwAAAAJAAgAAAAKAB0AAAAJAAgAAAALABwAAAAJAAgAAAALAB0AAAAJAAgAAAAMABwAAAAJAAgAAAAMAB0AAAAJAAgAAAANABwAAAAJAAgAAAANAB0AAAAJAAgAAAAOABwAAAAJAAgAAAAOAB0AAAAJAAgAAAAPABwAAAAJAAgAAAAPAB0AAAAJAAgAAAAQABwAAAAJAAgAAAAQAB0AAAAJAAgAAAARABwAAAAJAAgAAAARAB0AAAAJAAgAAAASABwAAAAJAAgAAAASAB0AAAAJAAgAAAATABwAAAAJAAgAAAATAB0AAAAJAAgAAAAUABwAAAAJAAgAAAAUAB0AAAAJAAgAAAA=")
 tile_set = ExtResource("3_nop7c")
 script = ExtResource("4_ke4gj")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_2" unique_id=985530628]
 script = ExtResource("5_yoidn")
@@ -68,7 +63,6 @@ position = Vector2(-2, 0)
 tile_map_data = PackedByteArray("AAAUABgAAAAGAAUAAAATABgAAAAGAAUAAAASABgAAAAGAAUAAAAUABkAAAAGAAUAAAATABkAAAAGAAUAAAASABkAAAAGAAUAAAA=")
 tile_set = ExtResource("3_nop7c")
 script = ExtResource("4_ke4gj")
-metadata/_custom_type_script = "uid://de0qurd6w0sdi"
 
 [node name="MaskableBehavior" type="Node" parent="tilemap_3" unique_id=1700973923]
 script = ExtResource("5_yoidn")

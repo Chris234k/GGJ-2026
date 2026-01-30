@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvvjprgbh3vlo"
-path="res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"
+uid="uid://y5hrjach1pnq"
+path="res://.godot/imported/villain_idle_01_256x256.png-df6864fea89c52ca20ac7db57b6c7fdd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Images/Tilemaps/tilemap_01.png"
-dest_files=["res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"]
+source_file="res://art/Images/Enemy/villain_idle_01_256x256.png"
+dest_files=["res://.godot/imported/villain_idle_01_256x256.png-df6864fea89c52ca20ac7db57b6c7fdd.ctex"]
 
 [params]
 

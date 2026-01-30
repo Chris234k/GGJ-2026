@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvvjprgbh3vlo"
-path="res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"
+uid="uid://cm88o2xlqhcrf"
+path="res://.godot/imported/villain_die_01_256x256.png-0fe7d6a5d683aa79411bb8b2ffa01584.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Images/Tilemaps/tilemap_01.png"
-dest_files=["res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"]
+source_file="res://art/Images/Enemy/villain_die_01_256x256.png"
+dest_files=["res://.godot/imported/villain_die_01_256x256.png-0fe7d6a5d683aa79411bb8b2ffa01584.ctex"]
 
 [params]
 

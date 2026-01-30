@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvvjprgbh3vlo"
-path="res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"
+uid="uid://b6u1kya7gip3m"
+path="res://.godot/imported/villain_jump_01_256x256.png-9b00df3a17b8e209b67c97b1fcd0345e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Images/Tilemaps/tilemap_01.png"
-dest_files=["res://.godot/imported/tilemap_01.png-4cf7fb01e7382e2c4779b936a5e83eab.ctex"]
+source_file="res://art/Images/Enemy/villain_jump_01_256x256.png"
+dest_files=["res://.godot/imported/villain_jump_01_256x256.png-9b00df3a17b8e209b67c97b1fcd0345e.ctex"]
 
 [params]
 
