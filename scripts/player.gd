@@ -144,6 +144,15 @@ func _do_respawn(spawn_position: Vector2) -> void:
 	else:
 		parent.add_child(self)
 
+## Instantly moves Chip to the given position. Called by Teleporter.
+## Resets velocity so momentum from before the teleport doesn't carry over
+## (otherwise Chip would keep moving at whatever speed he had before).
+func teleport(destination: Vector2) -> void:
+	if _is_dead:
+		return
+	global_position = destination
+	velocity = Vector2.ZERO
+
 # enemy responds to player death
 func on_player_die() -> void:
 	_do_respawn(enemy_spawn_pos)
