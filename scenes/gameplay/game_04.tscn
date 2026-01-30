@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://clpcwb8xlc0b2"]
 
-[ext_resource type="Script" uid="uid://hyfxev4bon38" path="res://scripts/level_config.gd" id="1_65o7n"]
+[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_65o7n"]
 [ext_resource type="Texture2D" uid="uid://b8fd6qd0g07mb" path="res://art/Images/Backgrounds/bg_03_gradient.png" id="2_bkwqv"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="3_nop7c"]
-[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="4_ke4gj"]
+[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="4_ke4gj"]
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="5_yoidn"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="6_05vrn"]
 [ext_resource type="PackedScene" uid="uid://du1tfrcaymbra" path="res://scenes/enemy.tscn" id="7_bkwqv"]
