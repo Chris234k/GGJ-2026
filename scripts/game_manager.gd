@@ -28,6 +28,7 @@ var bitmask: int = 0:
 				bit_toggled.emit(i, new_bit == 1)
 				# Notify registered object directly
 				_notify_registered_object(i, new_bit == 1)
+				
 
 ## Maximum number of bits for current level (difficulty modifier)
 ## Higher = more objects to manage = harder
@@ -213,8 +214,18 @@ func reset_level(reset_checkpoint_progress: bool = false) -> void:
 		reset_checkpoints()
 
 func reset_game() -> void:
+	clear_all_registrations()
 	reset_level(true)
 	current_level = 1
+
+## Clear all registered objects, tilemaps, respawn points, and player reference.
+## Call between level transitions to prevent stale references.
+func clear_all_registrations() -> void:
+	_registered_objects.clear()
+	level_tilemaps.clear()
+	_respawn_point = null
+	_initial_respawn_point = null
+	_player = null
 
 func damage_chip(amount: int = 1) -> void:
 	chip_health -= amount
