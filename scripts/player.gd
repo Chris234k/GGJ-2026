@@ -10,9 +10,19 @@ var _is_dead := false
 
 @export var auto_move := true
 @export var auto_move_left := false
+@export var is_player := true
+
+var parent: Node
+var enemy_spawn_pos := Vector2(0.0, 0.0)
 
 func _ready() -> void:
-	GameManager.register_player(self)
+	parent = get_parent()
+
+	if is_player:
+		GameManager.register_player(self)
+	else:
+		enemy_spawn_pos = global_position
+		GameManager.chip_died.connect(on_player_die)
 
 func _process(_delta: float) -> void:
 	if _is_dead:
@@ -96,9 +106,11 @@ func die(skip_death_animation: bool = false) -> void:
 		animated_sprite_2d.animation = "Die"
 		await get_tree().create_timer(0.5).timeout
 
-	respawn(GameManager.get_respawn_position())
-
-	GameManager.notify_chip_died()
+	if is_player:
+		respawn(GameManager.get_respawn_position())
+		GameManager.notify_chip_died()
+	else:
+		parent.remove_child(self)
 
 func respawn(spawn_position: Vector2) -> void:
 	velocity = Vector2.ZERO
@@ -118,14 +130,23 @@ func _do_respawn(spawn_position: Vector2) -> void:
 	animated_sprite_2d.animation = "Idle"
 	animated_sprite_2d.play()
 
-	# Fade back in
-	var tween = create_tween()
-	tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.15)
+	if is_player:
+		# Fade back in
+		var tween = create_tween()
+		tween.tween_property(animated_sprite_2d, "modulate", Color.WHITE, 0.15)
+	else:
+		parent.add_child(self)
 
+# enemy responds to player death
+func on_player_die() -> void:
+	_do_respawn(enemy_spawn_pos)
 
 # DEBUG ONLY - Remove before release
 # Toggle bits 0-3 with number keys 1-4
 func _input(event: InputEvent) -> void:
+	if !is_player:
+		return
+
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_1:
