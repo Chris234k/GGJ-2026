@@ -33,7 +33,9 @@ var use_or: bool = true
 
 # --- Constants ---
 
-var _toggle_keys: Array[int] = [KEY_A, KEY_S, KEY_D, KEY_F]
+var _toggle_keys: Array[String] = ["toggle_bit_0", "toggle_bit_1", "toggle_bit_2", "toggle_bit_3"]
+var _toggle_key_primary_name: Array[String]
+
 const BIT_FONT_SIZE: int = 22
 const LABEL_FONT_SIZE: int = 16
 const BIT_CELL_MIN_SIZE: Vector2 = Vector2(28, 0)
@@ -56,6 +58,15 @@ func _get_display_bit(mask_value: int, display_index: int) -> int:
 
 ## Connect to GameManager signals, wire up buttons, and build the initial UI.
 func _ready() -> void:
+	# take the primary key from the action and use it as the label
+	# "toggle_bit_0" -> "a"
+	for i in _toggle_keys.size():
+		var action_name = _toggle_keys[i]
+		var actions := InputMap.action_get_events(action_name)
+		var key_name = actions[0] as InputEventKey
+		var keycode := OS.get_keycode_string(key_name.physical_keycode)
+		_toggle_key_primary_name.push_back(keycode)
+
 	GameManager.bitmask_updated.connect(_on_bitmask_updated)
 	GameManager.max_bits_changed.connect(_on_max_bits_changed)
 	or_button.focus_mode = Control.FOCUS_NONE
@@ -64,6 +75,8 @@ func _ready() -> void:
 	and_button.pressed.connect(_on_and_pressed)
 	_rebuild_ui()
 	_sync_operation_buttons()
+
+	
 
 # =============================================================================
 # Input
@@ -79,7 +92,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	var max_b: int = GameManager.max_bits
 
 	for i in range(mini(_toggle_keys.size(), max_b)):
-		if event.keycode == _toggle_keys[i]:
+		if Input.is_action_pressed(_toggle_keys[i]):
 			if realtime_mode:
 				GameManager.toggle_bit(_display_to_bit(i))
 			else:
@@ -92,13 +105,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if realtime_mode:
 		return
 
-	if event.keycode == KEY_TAB:
+	if Input.is_action_pressed("toggle_bit_operand"):
 		use_or = not use_or
 		_sync_operation_buttons()
 		_refresh_row(output, _compute_preview(), "cyan")
 		return
 
-	if event.keycode == KEY_SPACE:
+	if Input.is_action_pressed("confirm_bits"):
 		_submit()
 		return
 
@@ -150,7 +163,7 @@ func _make_label_cell(display_index: int) -> RichTextLabel:
 	label.add_theme_font_size_override("normal_font_size", LABEL_FONT_SIZE)
 	var max_b: int = GameManager.max_bits
 	if display_index < _toggle_keys.size() and display_index < max_b:
-		var key_name: String = OS.get_keycode_string(_toggle_keys[display_index])
+		var key_name = _toggle_key_primary_name[display_index]
 		label.text = "[color=#88888888]%s[/color]" % key_name
 	else:
 		label.text = "[color=#88888888]-[/color]"
@@ -195,7 +208,7 @@ func _refresh_key_labels() -> void:
 		if i >= _toggle_keys.size() or i >= max_b:
 			break
 		var bit_on := _get_display_bit(active_mask, i) == 1
-		var key_name: String = OS.get_keycode_string(_toggle_keys[i])
+		var key_name := _toggle_key_primary_name[i]
 		if bit_on:
 			labels.get_child(i).text = "[color=green]%s[/color]" % key_name
 		else:
