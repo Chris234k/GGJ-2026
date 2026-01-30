@@ -2,11 +2,14 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
-const SPEED = 300.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -850.0
 
 var jump_force := 0.0
 var _is_dead := false
+
+@export var auto_move := true
+@export var auto_move_left := false
 
 func _ready() -> void:
 	GameManager.register_player(self)
@@ -62,10 +65,14 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		jump_force = 0
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("Left", "Right")
-	if direction:
+	var direction := 0.0
+
+	if auto_move:
+		if auto_move_left:
+			direction = -1
+		else:
+			direction = 1
+
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
