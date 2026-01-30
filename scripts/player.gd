@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 
 	# HACK: if we go too far down reload the level
 	if pos.y > 1000:
-		GameManager.kill_chip()
+		die(true) # falling off skips the death animation
 		return
 
 	for tilemap in GameManager.level_tilemaps:
@@ -78,11 +78,22 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = true
 
 
-func die() -> void:
-	GameManager.kill_chip()
+func die(skip_death_animation: bool = false) -> void:
+	if _is_dead:
+		return
+	
+	_is_dead = true
+
+	if !skip_death_animation:
+		# wait out the death animation
+		animated_sprite_2d.animation = "Die"
+		await get_tree().create_timer(0.5).timeout
+
+	respawn(GameManager.get_respawn_position())
+
+	GameManager.notify_chip_died()
 
 func respawn(spawn_position: Vector2) -> void:
-	_is_dead = true
 	velocity = Vector2.ZERO
 
 	# Death flash effect
@@ -96,6 +107,9 @@ func _do_respawn(spawn_position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	jump_force = 0
 	_is_dead = false
+
+	animated_sprite_2d.animation = "Idle"
+	animated_sprite_2d.play()
 
 	# Fade back in
 	var tween = create_tween()

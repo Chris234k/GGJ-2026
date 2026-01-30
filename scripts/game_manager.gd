@@ -76,10 +76,8 @@ func get_respawn_position() -> Vector2:
 	push_warning("GameManager: No respawn point registered, using origin")
 	return Vector2.ZERO
 
-func kill_chip() -> void:
+func notify_chip_died() -> void:
 	chip_died.emit()
-	if _player and _player.has_method("respawn"):
-		_player.respawn(get_respawn_position())
 
 ## Reset the respawn point to the initial spawn point.
 ## Call this on level reset to clear checkpoint progress.

@@ -106,7 +106,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die",
 "speed": 20.0
 }, {
@@ -169,7 +169,7 @@ script = ExtResource("1_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1872029367]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dt7fs")
-animation = &"Jump"
+animation = &"Die"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128497729]
