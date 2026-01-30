@@ -147,6 +147,12 @@ texture = ExtResource("1_tilemap")
 3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:6/0 = 0
 3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:8/0 = 0
+13:8/0/custom_data_2 = true
+13:9/0 = 0
+13:9/0/custom_data_2 = true
+13:10/0 = 0
+13:10/0/custom_data_2 = true
 
 [resource]
 physics_layer_0/collision_layer = 1
