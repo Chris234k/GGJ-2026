@@ -7,9 +7,10 @@
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="6_0qkon"]
 [ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="6_cfpkn"]
 [ext_resource type="TileSet" uid="uid://b4spg8mi60jqv" path="res://art/Images/Tilemaps/test_tiles.tres" id="7_gunpn"]
-[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="8_323q8"]
-[ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="9_0qkon"]
-[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="10_lvlcfg"]
+[ext_resource type="Script" uid="uid://bkync7mhgcj7x" path="res://scripts/maskable_tilemap.gd" id="8_323q8"]
+[ext_resource type="Script" uid="uid://cav56ej2travj" path="res://scripts/maskable_behavior.gd" id="9_0qkon"]
+[ext_resource type="Script" uid="uid://cep63iec2pfso" path="res://scripts/level_config.gd" id="10_lvlcfg"]
+[ext_resource type="Script" uid="uid://bh3o7waeg2cut" path="res://scripts/hazard_tilemap.gd" id="11_hazard"]
 
 [node name="LevelRoot" type="Node2D" unique_id=410381435]
 
@@ -33,10 +34,11 @@ script = ExtResource("9_0qkon")
 bit_index = 2
 
 [node name="FireTiles" type="TileMapLayer" parent="." unique_id=925691696]
+position = Vector2(0, -202)
 scale = Vector2(3, 3)
-tile_map_data = PackedByteArray("AAAKAA4AAAAPAAIAAAALAA4AAAAQAAIAAAAKAA8AAAAPAAMAAAAKABAAAAAPAAMAAAAKABEAAAAPAAMAAAAKABIAAAAPAAMAAAALAA8AAAAQAAMAAAALABAAAAAQAAMAAAALABEAAAAQAAMAAAALABIAAAAQAAMAAAA=")
+tile_map_data = PackedByteArray("AAAKAA4AAAAPAAIAAAALAA4AAAAQAAIAAAAKAA8AAAAPAAMAAAAKABAAAAAPAAMAAAAKABEAAAAPAAMAAAAKABIAAAAPAAMAAAALABAAAAAQAAMAAAALABEAAAAQAAMAAAALABIAAAAQAAMAAAALAA8AAAAQAAMAAAA=")
 tile_set = ExtResource("6_0qkon")
-script = ExtResource("8_323q8")
+script = ExtResource("11_hazard")
 
 [node name="MaskableBehavior" type="Node" parent="FireTiles" unique_id=786968139]
 script = ExtResource("9_0qkon")
