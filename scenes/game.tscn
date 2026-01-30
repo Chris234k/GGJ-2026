@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bxflihtj3hdfj" path="res://scenes/gameplay/game_03.tscn" id="4_g03"]
 [ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_04.tscn" id="5_iywne"]
 [ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://t3wnpot2m1d2" path="res://UI/hud_UI.tscn" id="7_hud"]
 
 [node name="Game" type="Node" unique_id=1282430220]
 script = ExtResource("1_game")
@@ -15,6 +16,8 @@ level_scenes = Array[PackedScene]([ExtResource("2_g01"), ExtResource("3_g02"), E
 
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=21999873]
 layer = 10
+
+[node name="HudUi" parent="UILayer" instance=ExtResource("7_hud")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=572198820]
 stream = ExtResource("6_p57ef")

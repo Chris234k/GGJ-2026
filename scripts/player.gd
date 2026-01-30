@@ -146,25 +146,3 @@ func _do_respawn(spawn_position: Vector2) -> void:
 # enemy responds to player death
 func on_player_die() -> void:
 	_do_respawn(enemy_spawn_pos)
-
-# DEBUG ONLY - Remove before release
-# Toggle bits 0-3 with number keys 1-4
-func _input(event: InputEvent) -> void:
-	if !is_player:
-		return
-
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_1:
-				print("DEBUG: Toggling bit 0, current mask: ", GameManager.get_binary_string())
-				GameManager.toggle_bit(0)
-				print("DEBUG: After toggle, mask: ", GameManager.get_binary_string())
-			KEY_2:
-				print("DEBUG: Toggling bit 1")
-				GameManager.toggle_bit(1)
-			KEY_3:
-				print("DEBUG: Toggling bit 2")
-				GameManager.toggle_bit(2)
-			KEY_4:
-				print("DEBUG: Toggling bit 3")
-				GameManager.toggle_bit(3)
