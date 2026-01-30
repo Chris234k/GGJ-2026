@@ -169,7 +169,7 @@ script = ExtResource("1_dqkch")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1872029367]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dt7fs")
-animation = &"Die"
+animation = &"Jump"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128497729]
@@ -180,7 +180,7 @@ shape = SubResource("RectangleShape2D_jej6c")
 position = Vector2(-1, 131)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1741698923]
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 
 [node name="HudUi" parent="Camera2D" unique_id=834537476 instance=ExtResource("6_tuyoq")]
 anchors_preset = 8
