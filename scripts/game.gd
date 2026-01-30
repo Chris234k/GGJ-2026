@@ -32,8 +32,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	# DEBUG: N = advance to next level
 	if event.keycode == KEY_N:
 		if current_state == GameState.PLAYING:
-			print("DEBUG: Advancing to next level")
+			print("DEBUG: next level")
 			advance_level()
+
+	if event.keycode == KEY_P:
+		if current_state == GameState.PLAYING:
+			if _current_level_index > 0:
+				print("DEBUG: previous level")
+				_current_level_index -= 1
+				load_level(_current_level_index)
 
 	# DEBUG: Shift+R = restart game
 	if event.keycode == KEY_R and event.shift_pressed:
