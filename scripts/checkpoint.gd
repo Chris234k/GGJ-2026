@@ -20,7 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _activate() -> void:
 	_activated = true
-	GameManager.register_respawn_point(self)
+	GameManager.register_respawn_point(global_position)
 
 	# Visual feedback - change flag to green
 	var tween = create_tween()

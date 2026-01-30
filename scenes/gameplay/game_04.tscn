@@ -80,4 +80,4 @@ position = Vector2(24, 323)
 scale = Vector2(0.25, 0.25)
 
 [node name="Enemy" parent="." unique_id=1051335646 instance=ExtResource("7_bkwqv")]
-position = Vector2(440, 325)
+position = Vector2(440, 323)

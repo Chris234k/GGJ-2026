@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://du51rdso8qq4f"]
 
-[ext_resource type="Script" path="res://scripts/respawn_point.gd" id="1_respawn"]
+[sub_resource type="GDScript" id="GDScript_o1owy"]
+script/source = "class_name RespawnPoint
+extends Marker2D
+## Initial spawn point for the level. This is where the player starts and
+## where they respawn if no checkpoint has been activated.
 
-[node name="RespawnPoint" type="Marker2D"]
-script = ExtResource("1_respawn")
+func _ready() -> void:
+	GameManager.register_respawn_point(global_position, true)
+"
+
+[node name="RespawnPoint" type="Marker2D" unique_id=377668347]
+script = SubResource("GDScript_o1owy")

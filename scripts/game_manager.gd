@@ -10,7 +10,7 @@ signal chip_health_changed(new_health: int)
 signal chip_died
 signal level_completed
 signal max_bits_changed(new_max: int)
-signal checkpoint_activated(checkpoint: Node2D)
+signal checkpoint_activated(checkpoint: Vector2)
 
 # --- Bitmask State ---
 ## The current bitmask controlling level objects.
@@ -54,13 +54,13 @@ var chip_health: int = 3:
 var chip_max_health: int = 3
 
 # --- Respawn ---
-var _respawn_point: Node2D = null
-var _initial_respawn_point: Node2D = null
+var _respawn_point := Vector2.ZERO
+var _initial_respawn_point := Vector2.ZERO
 var _player: CharacterBody2D = null
 
 ## Register a respawn point. If is_initial is true, also stores as the initial
 ## spawn point for level resets.
-func register_respawn_point(point: Node2D, is_initial: bool = false) -> void:
+func register_respawn_point(point: Vector2, is_initial: bool = false) -> void:
 	_respawn_point = point
 	if is_initial:
 		_initial_respawn_point = point
@@ -73,7 +73,7 @@ func register_player(player: CharacterBody2D) -> void:
 
 func get_respawn_position() -> Vector2:
 	if _respawn_point:
-		return _respawn_point.global_position
+		return _respawn_point
 	push_warning("GameManager: No respawn point registered, using origin")
 	return Vector2.ZERO
 
@@ -221,8 +221,8 @@ func reset_game() -> void:
 func clear_all_registrations() -> void:
 	_registered_objects.clear()
 	level_tilemaps.clear()
-	_respawn_point = null
-	_initial_respawn_point = null
+	_respawn_point = Vector2.ZERO
+	_initial_respawn_point = Vector2.ZERO
 	_player = null
 
 func damage_chip(amount: int = 1) -> void:

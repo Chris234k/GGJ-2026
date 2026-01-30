@@ -20,6 +20,7 @@ func _ready() -> void:
 
 	if is_player:
 		GameManager.register_player(self)
+		GameManager.register_respawn_point(global_position, true) # player's position is the original respawn point
 	else:
 		enemy_spawn_pos = global_position
 		GameManager.chip_died.connect(on_player_die)
