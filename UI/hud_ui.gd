@@ -85,14 +85,11 @@ func _ready() -> void:
 ## Handle A/S/D/F (toggle bits), Tab (switch OR/AND), and Space (submit).
 ## In realtime mode, bit keys write directly to GameManager.
 ## In submit mode, bit keys compose a local mask and Space applies it.
-func _unhandled_input(event: InputEvent) -> void:
-	if not event is InputEventKey or not event.pressed or event.echo:
-		return
-
+func _process(delta: float) -> void:
 	var max_b: int = GameManager.max_bits
 
 	for i in range(mini(_toggle_keys.size(), max_b)):
-		if Input.is_action_pressed(_toggle_keys[i]):
+		if Input.is_action_just_pressed(_toggle_keys[i]):
 			if realtime_mode:
 				GameManager.toggle_bit(_display_to_bit(i))
 			else:
@@ -105,13 +102,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if realtime_mode:
 		return
 
-	if Input.is_action_pressed("toggle_bit_operand"):
+	if Input.is_action_just_pressed("toggle_bit_operand"):
 		use_or = not use_or
 		_sync_operation_buttons()
 		_refresh_row(output, _compute_preview(), "cyan")
 		return
 
-	if Input.is_action_pressed("confirm_bits"):
+	if Input.is_action_just_pressed("confirm_bits"):
 		_submit()
 		return
 
