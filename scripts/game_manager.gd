@@ -12,6 +12,34 @@ signal level_completed
 signal max_bits_changed(new_max: int)
 signal checkpoint_activated(checkpoint: Vector2)
 
+# --- Bit Colors ---
+## Color assigned to each bit index, used for visual feedback (outlines, HUD, etc.).
+## Intentionally bright/saturated so they stand out against greyscale tiles.
+const BIT_COLORS: Array[Color] = [
+	Color(1.0, 0.2, 0.2),   # 0: Red
+	Color(0.3, 0.5, 1.0),   # 1: Blue
+	Color(0.7, 0.2, 1.0),   # 2: Violet
+	Color(1.0, 0.9, 0.2),   # 3: Yellow
+	Color(1.0, 0.3, 0.8),   # 4: Magenta
+	Color(0.3, 1.0, 1.0),   # 5: Cyan
+	Color(1.0, 0.6, 0.1),   # 6: Orange
+	Color(0.7, 0.3, 1.0),   # 7: Purple
+	Color(1.0, 0.5, 0.5),   # 8: Light Red
+	Color(0.5, 0.7, 1.0),   # 9: Light Blue
+	Color(0.8, 0.5, 1.0),   # 10: Light Violet
+	Color(1.0, 1.0, 0.5),   # 11: Light Yellow
+	Color(1.0, 0.6, 0.9),   # 12: Light Magenta
+	Color(0.6, 1.0, 1.0),   # 13: Light Cyan
+	Color(1.0, 0.8, 0.5),   # 14: Light Orange
+	Color(0.8, 0.6, 1.0),   # 15: Light Purple
+]
+
+## Get the color for a given bit index. Returns white if out of range.
+static func get_bit_color(bit_index: int) -> Color:
+	if bit_index >= 0 and bit_index < BIT_COLORS.size():
+		return BIT_COLORS[bit_index]
+	return Color.WHITE
+
 # --- Bitmask State ---
 ## The current bitmask controlling level objects.
 ## Each bit (0-7 for 8-bit, 0-15 for 16-bit, etc.) maps to a maskable object.

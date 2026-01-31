@@ -5,11 +5,11 @@ extends Control
 ##
 ## Layout (submit mode):
 ##   [OR] [AND]       <- operation selector
-##    A  S  D  F      <- key labels (green when active)
-##    0  0  0  1      <- current GameManager bitmask (green)
-##    0  0  0  0      <- user mask bits (white)
+##    A  S  D  F      <- key labels (always saturated bit color)
+##    0  0  0  1      <- current GameManager bitmask (always bit color)
+##    0  0  0  0      <- user mask bits (bit color if 1, white if 0)
 ##   ────────────
-##    0  0  0  1      <- preview of operation result (cyan)
+##    0  0  0  1      <- preview of operation result (bit color if 1, cyan if 0)
 
 # --- Node References ---
 
@@ -76,8 +76,6 @@ func _ready() -> void:
 	_rebuild_ui()
 	_sync_operation_buttons()
 
-	
-
 # =============================================================================
 # Input
 # =============================================================================
@@ -96,7 +94,6 @@ func _process(delta: float) -> void:
 				user_mask ^= (1 << _display_to_bit(i))
 				_refresh_row(mask, user_mask, "white")
 				_refresh_row(output, _compute_preview(), "cyan")
-				_refresh_key_labels()
 			return
 
 	if realtime_mode:
@@ -148,7 +145,9 @@ func _rebuild_grid(grid: GridContainer, count: int, factory: Callable) -> void:
 # Cell Factories
 # =============================================================================
 
-## Create a key hint label cell (A/S/D/F) with smaller font, dimmed gray by default.
+## Create a key hint label cell (A/S/D/F) with smaller font.
+## Each key is colored with its bit's color from GameManager.BIT_COLORS
+## so the player can match keys to tilemap objects at a glance.
 func _make_label_cell(display_index: int) -> RichTextLabel:
 	var label := RichTextLabel.new()
 	label.bbcode_enabled = true
@@ -161,7 +160,9 @@ func _make_label_cell(display_index: int) -> RichTextLabel:
 	var max_b: int = GameManager.max_bits
 	if display_index < _toggle_keys.size() and display_index < max_b:
 		var key_name = _toggle_key_primary_name[display_index]
-		label.text = "[color=#88888888]%s[/color]" % key_name
+		var bit_idx := _display_to_bit(display_index)
+		var bit_color := GameManager.get_bit_color(bit_idx).to_html(false)
+		label.text = "[color=#%s]%s[/color]" % [bit_color, key_name]
 	else:
 		label.text = "[color=#88888888]-[/color]"
 	return label
@@ -183,33 +184,33 @@ func _make_bit_cell(_display_index: int, color: String = "white") -> RichTextLab
 # Refresh
 # =============================================================================
 
-## Update all grid rows and key labels to reflect current state.
+## Update all grid rows to reflect current state.
 func _refresh_all() -> void:
-	_refresh_row(current_bits, GameManager.bitmask, "green")
+	_refresh_current_bits()
 	_refresh_row(mask, user_mask, "white")
 	_refresh_row(output, _compute_preview(), "cyan")
-	_refresh_key_labels()
 
-## Update every cell in a grid row to show the bits of mask_value in the given color.
-func _refresh_row(grid: GridContainer, mask_value: int, color: String) -> void:
+## Update the current bitmask row. Every cell always uses its bit's color
+## regardless of value, so the player can always see which bit is which.
+func _refresh_current_bits() -> void:
+	for i in range(current_bits.get_child_count()):
+		var bit_val := _get_display_bit(GameManager.bitmask, i)
+		var bit_idx := _display_to_bit(i)
+		var hex := GameManager.get_bit_color(bit_idx).to_html(false)
+		current_bits.get_child(i).text = "[color=#%s]%d[/color]" % [hex, bit_val]
+
+## Update every cell in a grid row to show the bits of mask_value.
+## Active bits (1) are colored with their bit's color from GameManager.
+## Inactive bits (0) use the row's default_color (e.g. "white", "cyan").
+func _refresh_row(grid: GridContainer, mask_value: int, default_color: String) -> void:
 	for i in range(grid.get_child_count()):
 		var bit_val := _get_display_bit(mask_value, i)
-		grid.get_child(i).text = "[color=%s]%d[/color]" % [color, bit_val]
-
-## Update key labels (A/S/D/F) to green when their bit is active, gray when inactive.
-## Tracks user_mask in submit mode, GameManager.bitmask in realtime mode.
-func _refresh_key_labels() -> void:
-	var max_b: int = GameManager.max_bits
-	var active_mask: int = GameManager.bitmask if realtime_mode else user_mask
-	for i in range(labels.get_child_count()):
-		if i >= _toggle_keys.size() or i >= max_b:
-			break
-		var bit_on := _get_display_bit(active_mask, i) == 1
-		var key_name := _toggle_key_primary_name[i]
-		if bit_on:
-			labels.get_child(i).text = "[color=green]%s[/color]" % key_name
+		if bit_val == 1:
+			var bit_idx := _display_to_bit(i)
+			var hex := GameManager.get_bit_color(bit_idx).to_html(false)
+			grid.get_child(i).text = "[color=#%s]1[/color]" % hex
 		else:
-			labels.get_child(i).text = "[color=#88888888]%s[/color]" % key_name
+			grid.get_child(i).text = "[color=%s]0[/color]" % default_color
 
 # =============================================================================
 # Operations & Submit
@@ -226,7 +227,6 @@ func _submit() -> void:
 	user_mask = 0
 	_refresh_row(mask, user_mask, "white")
 	_refresh_row(output, _compute_preview(), "cyan")
-	_refresh_key_labels()
 
 # =============================================================================
 # Button Styling
@@ -278,12 +278,9 @@ func _on_and_pressed() -> void:
 # =============================================================================
 
 ## Respond to GameManager bitmask changes by refreshing the top row and preview.
-## In realtime mode, also updates key labels since they track GameManager state.
 func _on_bitmask_updated(_new_mask: int) -> void:
-	_refresh_row(current_bits, GameManager.bitmask, "green")
+	_refresh_current_bits()
 	_refresh_row(output, _compute_preview(), "cyan")
-	if realtime_mode:
-		_refresh_key_labels()
 
 ## Rebuild the entire UI when max_bits changes (e.g. new level loaded).
 func _on_max_bits_changed(_new_max: int) -> void:
