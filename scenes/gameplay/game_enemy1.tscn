@@ -14,6 +14,7 @@
 script = ExtResource("1_lab3x")
 bit_0 = true
 bit_1 = true
+bit_3 = true
 
 [node name="BackgroundLayer" type="Parallax2D" parent="." unique_id=385108093]
 scroll_scale = Vector2(0.1, 0.1)
@@ -38,7 +39,7 @@ script = ExtResource("5_1a10k")
 metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 
 [node name="tilemap_1" type="TileMapLayer" parent="." unique_id=754066882]
-tile_map_data = PackedByteArray("AAAXABcAAAAPAAUAAAAWABcAAAAPAAUAAAAVABcAAAAPAAUAAAAUABcAAAAPAAUAAAATABcAAAAPAAUAAAASABcAAAAPAAUAAAARABcAAAAPAAUAAAAQABYAAAAPAAUAAAAHABYAAAAPAAUAAAAQABcAAAAPAAUAAAAPABcAAAAPAAUAAAAOABcAAAAPAAUAAAA=")
+tile_map_data = PackedByteArray("AAAXABcAAAAPAAUAAAAWABcAAAAPAAUAAAAVABcAAAAPAAUAAAAUABcAAAAPAAUAAAATABcAAAAPAAUAAAASABcAAAAPAAUAAAARABcAAAAPAAUAAAAHABYAAAAPAAUAAAAQABcAAAAPAAUAAAAPABcAAAAPAAUAAAAOABcAAAAPAAUAAAA=")
 tile_set = ExtResource("3_fg0re")
 script = ExtResource("4_bk3fv")
 
@@ -59,6 +60,7 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 
 [node name="tilemap_3" type="TileMapLayer" parent="." unique_id=632250124]
 position = Vector2(-2, 0)
+tile_map_data = PackedByteArray("AAARABYAAAAJAAgAAAA=")
 tile_set = ExtResource("3_fg0re")
 script = ExtResource("4_bk3fv")
 
