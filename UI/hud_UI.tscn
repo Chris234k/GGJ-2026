@@ -4,21 +4,16 @@
 [ext_resource type="FontFile" uid="uid://be85l0hqahuhe" path="res://UI/Fonts/ChicagoFLF.ttf" id="2_vcdkw"]
 [ext_resource type="Texture2D" uid="uid://bnrcoiph3f46p" path="res://UI/Images/ui_panel_01.png" id="3_mcg4j"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.05, 0.05, 0.12, 0.85)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0.8, 0.4, 0.5)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("3_mcg4j")
+texture_margin_left = 8.0
+texture_margin_top = 34.0
+texture_margin_right = 8.0
+texture_margin_bottom = 5.0
+content_margin_left = 24.0
+content_margin_top = 38.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
 color = Color(0, 0.8, 0.4, 0.3)
@@ -31,11 +26,6 @@ offset_right = 1152.0
 offset_bottom = 648.0
 script = ExtResource("1_is7uo")
 
-[node name="UI_Background" type="Sprite2D" parent="." unique_id=1798694776]
-position = Vector2(1066.0001, 132.00002)
-scale = Vector2(0.81999993, 0.82)
-texture = ExtResource("3_mcg4j")
-
 [node name="Panel" type="PanelContainer" parent="." unique_id=906320381]
 layout_mode = 1
 anchors_preset = 1
@@ -45,7 +35,7 @@ offset_left = -20.0
 offset_top = 12.0
 offset_right = -12.0
 grow_horizontal = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
 
 [node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1128346649]
 layout_mode = 2
@@ -75,17 +65,17 @@ text = "AND"
 
 [node name="Labels" type="GridContainer" parent="Panel/VBox" unique_id=1943957502]
 layout_mode = 2
-theme_override_constants/h_separation = 12
+theme_override_constants/h_separation = 18
 columns = 4
 
 [node name="CurrentBits" type="GridContainer" parent="Panel/VBox" unique_id=1742154580]
 layout_mode = 2
-theme_override_constants/h_separation = 12
+theme_override_constants/h_separation = 18
 columns = 4
 
 [node name="Mask" type="GridContainer" parent="Panel/VBox" unique_id=1292766915]
 layout_mode = 2
-theme_override_constants/h_separation = 12
+theme_override_constants/h_separation = 18
 columns = 4
 
 [node name="Separator" type="HSeparator" parent="Panel/VBox" unique_id=1662532534]
@@ -94,5 +84,5 @@ theme_override_styles/separator = SubResource("StyleBoxLine_sep")
 
 [node name="Output" type="GridContainer" parent="Panel/VBox" unique_id=1755904268]
 layout_mode = 2
-theme_override_constants/h_separation = 12
+theme_override_constants/h_separation = 18
 columns = 4
