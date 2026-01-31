@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cyfopgcmsew45"]
 
 [ext_resource type="Script" uid="uid://dx6oihppktmow" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Script" path="res://scripts/camera_zoom.gd" id="5_czoom"]
 [ext_resource type="Texture2D" uid="uid://udrnbjkcv8oy" path="res://art/Images/Player/chip_idle_01_256x256.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://d3f48sis8vt0q" path="res://art/Images/Player/chip_die_01_256x256.png" id="2_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://coa71tkvuabvt" path="res://art/Images/Player/chip_jump_01_256x256.png" id="3_dqkch"]
@@ -181,3 +182,4 @@ position = Vector2(-1, 131)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1741698923]
 offset = Vector2(150, 0)
 zoom = Vector2(2, 2)
+script = ExtResource("5_czoom")
