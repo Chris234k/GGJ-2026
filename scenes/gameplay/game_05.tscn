@@ -1,0 +1,97 @@
+[gd_scene format=4 uid="uid://cbtr4ckgkrn4y"]
+
+[ext_resource type="Script" uid="uid://cmnmdmgutt0t0" path="res://scripts/level_config.gd" id="1_r6ev0"]
+[ext_resource type="Texture2D" uid="uid://b8fd6qd0g07mb" path="res://art/Images/Backgrounds/bg_03_gradient.png" id="2_372ti"]
+[ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="3_72etx"]
+[ext_resource type="Script" uid="uid://de0qurd6w0sdi" path="res://scripts/maskable_tilemap.gd" id="4_4bgl1"]
+[ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="5_hupe7"]
+[ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="6_jxwa5"]
+[ext_resource type="PackedScene" uid="uid://pgc7hsilg6ye" path="res://scenes/teleporter_no_bits.tscn" id="7_372ti"]
+
+[node name="game_04" type="Node2D" unique_id=2096551147]
+
+[node name="level_config" type="Node" parent="." unique_id=885048635]
+script = ExtResource("1_r6ev0")
+bit_0 = true
+bit_1 = true
+bit_2 = true
+bit_3 = true
+
+[node name="BackgroundLayer" type="Parallax2D" parent="." unique_id=427794200]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="BackgroundImage" type="Sprite2D" parent="BackgroundLayer" unique_id=561714081]
+position = Vector2(599, 313)
+scale = Vector2(0.49072263, 0.42480466)
+texture = ExtResource("2_372ti")
+
+[node name="tilemap_always" type="TileMapLayer" parent="." unique_id=298539414]
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("3_72etx")
+script = ExtResource("4_4bgl1")
+
+[node name="tilemap_0" type="TileMapLayer" parent="." unique_id=840074273]
+tile_map_data = PackedByteArray("AAAFAAkAAAAPAAYAAAAFAAoAAAAPAAYAAAAFAAsAAAAPAAYAAAAFAAwAAAAPAAYAAAAFAA0AAAAPAAYAAAAFAA4AAAAPAAYAAAAFAA8AAAAPAAYAAAAFABAAAAAPAAYAAAAFABEAAAAPAAYAAAAFABIAAAAPAAYAAAAFABMAAAAPAAYAAAAFABQAAAAPAAYAAAAFABUAAAAPAAYAAAAFABYAAAAPAAYAAAAFABcAAAAPAAUAAAAFABgAAAAPAAYAAAAFABkAAAAPAAYAAAAFABoAAAAPAAYAAAAFABsAAAAPAAYAAAAFABwAAAAPAAYAAAAFAB0AAAAPAAYAAAAFAB4AAAAPAAUAAAAFAB8AAAAPAAYAAAAFACAAAAAPAAYAAAAFACEAAAAPAAYAAAAFACIAAAAPAAYAAAAFACMAAAAPAAYAAAAFACQAAAAPAAYAAAAFACUAAAAPAAUAAFAFACYAAAAPAAYAAAAFACcAAAAPAAYAAAAFACgAAAAPAAYAAAAFACkAAAAPAAYAAAAFACoAAAAPAAYAAAAFACsAAAAPAAYAAAAFACwAAAAPAAUAAAAFAC0AAAAPAAYAAAAFAC4AAAAPAAYAAAAFAC8AAAAPAAYAAAAFADAAAAAPAAYAAAAFADEAAAAPAAYAAAAFADIAAAAPAAYAAAAFADMAAAAPAAYAAAAFADQAAAAPAAYAAAAFADUAAAAPAAYAAAAFADYAAAAPAAYAAAAFADcAAAAPAAYAAAAFADgAAAAPAAYAAAAFADkAAAAPAAYAAAA=")
+tile_set = ExtResource("3_72etx")
+script = ExtResource("4_4bgl1")
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_0" unique_id=1886600958]
+script = ExtResource("5_hupe7")
+
+[node name="tilemap_1" type="TileMapLayer" parent="." unique_id=754066882]
+position = Vector2(-2, 0)
+tile_map_data = PackedByteArray("AAD//x4AAAAKAAUAAAAAAB4AAAAKAAUAAAABAB4AAAAKAAUAAAACAB4AAAAKAAUAAAADAB4AAAAKAAUAAAAEAB4AAAAKAAUAAAA=")
+tile_set = ExtResource("3_72etx")
+script = ExtResource("4_4bgl1")
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_1" unique_id=480062592]
+script = ExtResource("5_hupe7")
+bit_index = 1
+
+[node name="tilemap_2" type="TileMapLayer" parent="." unique_id=625179858]
+position = Vector2(-2, 0)
+tile_map_data = PackedByteArray("AAD//yUAAAAKAAUAAAAAACUAAAAKAAUAAAABACUAAAAKAAUAAAACACUAAAAKAAUAAAADACUAAAAKAAUAAAAEACUAAAAKAAUAAAA=")
+tile_set = ExtResource("3_72etx")
+script = ExtResource("4_4bgl1")
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_2" unique_id=472815522]
+script = ExtResource("5_hupe7")
+bit_index = 2
+
+[node name="tilemap_3" type="TileMapLayer" parent="." unique_id=42306084]
+position = Vector2(-2, 0)
+tile_map_data = PackedByteArray("AAD//ywAAAAKAAUAAAAAACwAAAAKAAUAAAABACwAAAAKAAUAAAACACwAAAAKAAUAAAADACwAAAAKAAUAAAAEACwAAAAKAAUAAAA=")
+tile_set = ExtResource("3_72etx")
+script = ExtResource("4_4bgl1")
+
+[node name="MaskableBehavior" type="Node" parent="tilemap_3" unique_id=2008738489]
+script = ExtResource("5_hupe7")
+bit_index = 3
+
+[node name="Player" parent="." unique_id=1785403490 instance=ExtResource("6_jxwa5")]
+position = Vector2(34, 323)
+scale = Vector2(0.25, 0.25)
+
+[node name="1A Teleporter_No_Bits" parent="." unique_id=124518824 instance=ExtResource("7_372ti")]
+position = Vector2(-77, 428)
+paired_teleporter = NodePath("../1B Teleporter_No_Bits")
+
+[node name="1B Teleporter_No_Bits" parent="." unique_id=1339937324 instance=ExtResource("7_372ti")]
+position = Vector2(636, 211)
+paired_teleporter = NodePath("../1A Teleporter_No_Bits")
+
+[node name="2A Teleporter_No_Bits" parent="." unique_id=1146885905 instance=ExtResource("7_372ti")]
+position = Vector2(454, 540)
+paired_teleporter = NodePath("../2B Teleporter_No_Bits")
+
+[node name="2B Teleporter_No_Bits" parent="." unique_id=1657200427 instance=ExtResource("7_372ti")]
+position = Vector2(30, 71)
+paired_teleporter = NodePath("../2A Teleporter_No_Bits")
+
+[node name="3A Teleporter_No_Bits" parent="." unique_id=1395214993 instance=ExtResource("7_372ti")]
+position = Vector2(454, 652)
+paired_teleporter = NodePath("../3B Teleporter_No_Bits")
+
+[node name="3B Teleporter_No_Bits" parent="." unique_id=1555097700 instance=ExtResource("7_372ti")]
+position = Vector2(-496, 415)
+paired_teleporter = NodePath("../3A Teleporter_No_Bits")

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cxrgcw8hybmme"]
 
-[ext_resource type="Script" uid="uid://dfjw16li2n226" path="res://scripts/teleporter.gd" id="1_teleporter"]
-[ext_resource type="Script" uid="uid://cav56ej2travj" path="res://scripts/maskable_behavior.gd" id="2_maskable"]
-[ext_resource type="Texture2D" uid="uid://on1bh30mvk1m" path="res://art/Images/Tilemaps/tilemap_01.png" id="3_hkm18"]
+[ext_resource type="Script" uid="uid://dsad56fnnpu76" path="res://scripts/teleporter.gd" id="1_teleporter"]
+[ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="2_maskable"]
+[ext_resource type="Texture2D" uid="uid://cvvjprgbh3vlo" path="res://art/Images/Tilemaps/tilemap_01.png" id="3_hkm18"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(32, 32)
