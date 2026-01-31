@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bq8b1hv10jtr0" path="res://scenes/gameplay/game_01.tscn" id="2_g01"]
 [ext_resource type="PackedScene" uid="uid://bl0n0th1n7nro" path="res://scenes/gameplay/game_03.tscn" id="3_g02"]
 [ext_resource type="PackedScene" uid="uid://bxflihtj3hdfj" path="res://scenes/gameplay/game_02.tscn" id="4_g03"]
-[ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_04.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://j81nawgx55c6" path="res://scenes/gameplay/game_05.tscn" id="6_g05"]
+[ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_enemy2.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://j81nawgx55c6" path="res://scenes/Levels/teleporter_test.tscn" id="6_g05"]
 [ext_resource type="PackedScene" uid="uid://t3wnpot2m1d2" path="res://UI/hud_UI.tscn" id="7_hud"]
 [ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="7_p57ef"]
 
