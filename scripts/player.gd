@@ -25,6 +25,10 @@ func _ready() -> void:
 		enemy_spawn_pos = global_position
 		GameManager.chip_died.connect(on_player_die)
 
+func _exit_tree() -> void:
+	if !is_player:
+		GameManager.chip_died.disconnect(on_player_die)
+
 func _process(_delta: float) -> void:
 	if _is_dead:
 		return
