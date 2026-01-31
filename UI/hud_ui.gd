@@ -26,6 +26,16 @@ extends Control
 
 @export var realtime_mode: bool = false
 
+## Scales the entire HUD panel. The setter re-applies at runtime so you can
+## tweak the value in the running editor and see instant feedback.
+## Pivot is set to the panel's top-right corner so scaling grows leftward
+## instead of pushing the panel off-screen.
+@export_range(0.5, 3.0, 0.1) var ui_scale: float = 1.0:
+	set(value):
+		ui_scale = value
+		if is_node_ready():
+			_apply_ui_scale()
+
 # --- State ---
 
 var user_mask: int = 0
@@ -36,8 +46,9 @@ var use_or: bool = true
 var _toggle_keys: Array[String] = ["toggle_bit_0", "toggle_bit_1", "toggle_bit_2", "toggle_bit_3"]
 var _toggle_key_primary_name: Array[String]
 
+const CHICAGO_FONT = preload("res://UI/Fonts/ChicagoFLF.ttf")
 const BIT_FONT_SIZE: int = 22
-const LABEL_FONT_SIZE: int = 16
+const LABEL_FONT_SIZE: int = 22
 const BIT_CELL_MIN_SIZE: Vector2 = Vector2(28, 0)
 const LABEL_CELL_MIN_SIZE: Vector2 = Vector2(28, 0)
 
@@ -75,6 +86,16 @@ func _ready() -> void:
 	and_button.pressed.connect(_on_and_pressed)
 	_rebuild_ui()
 	_sync_operation_buttons()
+	_apply_ui_scale()
+
+## Apply ui_scale to the Panel node. Uses pivot_offset so the panel scales
+## from its top-right corner (where it's anchored) instead of top-left.
+func _apply_ui_scale() -> void:
+	var panel: PanelContainer = $Panel
+	# Wait one frame for layout to resolve so panel.size is accurate.
+	await get_tree().process_frame
+	panel.pivot_offset = Vector2(panel.size.x, 0)
+	panel.scale = Vector2(ui_scale, ui_scale)
 
 # =============================================================================
 # Input
@@ -156,6 +177,7 @@ func _make_label_cell(display_index: int) -> RichTextLabel:
 	label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER | Control.SIZE_EXPAND
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER | Control.SIZE_EXPAND
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_override("normal_font", CHICAGO_FONT)
 	label.add_theme_font_size_override("normal_font_size", LABEL_FONT_SIZE)
 	var max_b: int = GameManager.max_bits
 	if display_index < _toggle_keys.size() and display_index < max_b:
@@ -176,6 +198,7 @@ func _make_bit_cell(_display_index: int, color: String = "white") -> RichTextLab
 	label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER | Control.SIZE_EXPAND
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER | Control.SIZE_EXPAND
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_override("normal_font", CHICAGO_FONT)
 	label.add_theme_font_size_override("normal_font_size", BIT_FONT_SIZE)
 	label.text = "[color=%s]0[/color]" % color
 	return label
@@ -239,21 +262,35 @@ func _sync_operation_buttons() -> void:
 	_style_toggle_button(or_button, use_or)
 	_style_toggle_button(and_button, not use_or)
 
-## Apply active (green) or inactive (gray) styling to an operation button,
-## overriding all Godot button states so defaults don't interfere.
+## Apply active (green) or inactive (gray) styling to an operation button
+## using a Windows ME-style raised bevel: square corners, 2px border on all
+## sides with a uniform highlight color matching the green/gray theme.
+## Square corners are the biggest ME visual cue (vs the old rounded style).
 func _style_toggle_button(btn: Button, active: bool) -> void:
 	var style := StyleBoxFlat.new()
-	style.set_corner_radius_all(4)
+	style.set_corner_radius_all(0)          # square corners = ME look
 	style.set_content_margin_all(4)
-	style.set_border_width_all(1)
+	style.set_border_width_all(2)           # uniform 2px bevel border
 	if active:
 		style.bg_color = Color(0.0, 0.3, 0.15, 0.8)
-		style.border_color = Color(0.0, 0.8, 0.4, 0.6)
+		style.border_color = Color(0.0, 0.85, 0.42, 0.7)  # bright green border
 	else:
-		style.bg_color = Color(0.1, 0.1, 0.15, 0.5)
-		style.border_color = Color(0.3, 0.3, 0.3, 0.3)
-	for state in ["normal", "pressed", "hover", "hover_pressed"]:
+		style.bg_color = Color(0.12, 0.12, 0.16, 0.6)
+		style.border_color = Color(0.35, 0.35, 0.4, 0.5)  # light gray border
+
+	# Hover: slightly brighter fill so the player gets feedback on mouseover.
+	var hover_style := style.duplicate()
+	if active:
+		hover_style.bg_color = Color(0.0, 0.35, 0.18, 0.85)
+	else:
+		hover_style.bg_color = Color(0.16, 0.16, 0.2, 0.65)
+
+	for state in ["normal", "pressed"]:
 		btn.add_theme_stylebox_override(state, style)
+	for state in ["hover", "hover_pressed"]:
+		btn.add_theme_stylebox_override(state, hover_style)
+
+	# Font colors — green for active, gray for inactive.
 	var font_color := Color(0.0, 1.0, 0.4) if active else Color(0.4, 0.4, 0.4)
 	var hover_color := Color(0.0, 1.0, 0.5) if active else Color(0.5, 0.5, 0.5)
 	for color_name in ["font_color", "font_pressed_color"]:
