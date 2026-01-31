@@ -2,6 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://cvvjprgbh3vlo" path="res://art/Images/Tilemaps/tilemap_01.png" id="1_tilemap"]
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_ax6eb"]
+tile_data = PackedInt32Array(0, 851968, 8, 65536, 851968, 9, 131072, 851968, 10)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_clmrn"]
 texture = ExtResource("1_tilemap")
 15:2/0 = 0
@@ -163,3 +166,4 @@ custom_data_layer_1/type = 3
 custom_data_layer_2/name = "is_goal"
 custom_data_layer_2/type = 1
 sources/0 = SubResource("TileSetAtlasSource_clmrn")
+pattern_0 = SubResource("TileMapPattern_ax6eb")
