@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://be1x5xk2wnhi8" path="res://scripts/maskable_behavior.gd" id="4_80npk"]
 [ext_resource type="TileSet" uid="uid://dptm01tileset" path="res://art/Images/Tilemaps/tilemap_01.tres" id="5_mjmww"]
 [ext_resource type="PackedScene" uid="uid://cyfopgcmsew45" path="res://scenes/player.tscn" id="5_sw5ro"]
+[ext_resource type="FontFile" uid="uid://be85l0hqahuhe" path="res://UI/Fonts/ChicagoFLF.ttf" id="7_mjmww"]
 
 [node name="game_03" type="Node2D" unique_id=2096551147]
 
@@ -69,3 +70,13 @@ metadata/_custom_type_script = "uid://be1x5xk2wnhi8"
 [node name="Player" parent="." unique_id=1785403490 instance=ExtResource("5_sw5ro")]
 position = Vector2(34, 323)
 scale = Vector2(0.25, 0.25)
+
+[node name="Label" type="Label" parent="." unique_id=1777233220]
+offset_left = 206.0
+offset_top = 194.0
+offset_right = 428.0
+offset_bottom = 237.0
+theme_override_fonts/font = ExtResource("7_mjmww")
+text = "You can also 
+turn off bits.
+Try using AND"
