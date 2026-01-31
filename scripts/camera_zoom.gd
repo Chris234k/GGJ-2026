@@ -150,20 +150,9 @@ func _finish_zoom_in() -> void:
 # -- Background Scaling --
 
 func _scale_background_to_level() -> void:
-	## Finds the BackgroundLayer/BackgroundImage in the level and scales the
-	## sprite up to cover the full level bounds. This is done once at startup
-	## so the background is always large enough for overview mode. Since the
-	## background is a gradient, the upscale is visually seamless — it just
-	## means the parallax layer has more coverage.
-	##
-	## Tree structure:
-	##   Level root (game_01)
-	##     ├── BackgroundLayer (Parallax2D)
-	##     │     └── BackgroundImage (Sprite2D)  ← scale this up
-	##     ├── tilemap_always
-	##     ├── ...tilemaps...
-	##     └── Player
-	##           └── Camera2D  ← we are here
+	## Scales the BackgroundImage sprite large enough to cover the screen at any
+	## camera position and zoom level. The background is a gradient, so oversizing
+	## it is visually free — no need to calculate exact coverage.
 	var player := get_parent()
 	if not player:
 		return
@@ -179,36 +168,20 @@ func _scale_background_to_level() -> void:
 		return
 
 	var bounds := _calculate_level_bounds()
-	var tex_size := bg_image.texture.get_size()
 
-	# Calculate the scale needed for the texture to cover the entire level bounds.
-	# Use the larger of width/height ratios so the image fully covers (no gaps).
-	var needed_x := bounds.size.x / tex_size.x
-	var needed_y := bounds.size.y / tex_size.y
-	var cover: float = max(needed_x, needed_y) * 1.2  # 20% extra for parallax movement
-
-	# Only scale up, never shrink below the original
-	var original_scale_factor: float = max(bg_image.scale.x, bg_image.scale.y)
-	cover = max(cover, original_scale_factor)
-
-	bg_image.scale = Vector2(cover, cover)
-
-	# Center the background on the level bounds so it covers evenly
+	const BG_SCALE := 3.0
+	bg_image.scale = Vector2(BG_SCALE, BG_SCALE)
 	bg_image.position = bounds.get_center()
 
 
 # -- Level Bounds Calculation --
 
 func _calculate_level_bounds() -> Rect2:
-	## Computes a bounding rectangle that encompasses every tile across all
-	## registered tilemaps. This tells us the full spatial extent of the level.
-	##
-	## Steps:
-	##   1. Get all tilemaps from GameManager.level_tilemaps
-	##   2. For each tilemap, iterate get_used_cells() to find every placed tile
-	##   3. Convert cell coords → local coords (map_to_local) → global coords (to_global)
-	##   4. Expand the bounding rect to include each tile's full 16x16 area
-	##   5. Add a margin so edge tiles aren't flush with the screen border
+	## Computes a bounding rectangle that encompasses the full level:
+	##   1. Every tile across all registered tilemaps
+	##   2. Every Node2D child of the level root (teleporters, player, etc.)
+	## This ensures the overview camera shows everything placed in the level,
+	## not just the tilemap geometry.
 
 	var bounds := Rect2()
 	var first := true
@@ -226,21 +199,32 @@ func _calculate_level_bounds() -> Rect2:
 			var global_pos: Vector2 = tilemap.to_global(local_pos)
 
 			# Build a small rect for this tile (centered on global_pos, size = tile_size).
-			# This accounts for the tile's full visual extent, not just its center point.
 			var tile_rect := Rect2(global_pos - tile_size / 2.0, tile_size)
 
 			if first:
 				bounds = tile_rect
 				first = false
 			else:
-				# Merge: expand bounds to include this tile
 				bounds = bounds.merge(tile_rect)
 
-	# If no tiles were found (empty level?), return a fallback centered on origin
+	# Also include non-tilemap Node2D children of the level root (teleporters,
+	# checkpoints, etc.) so the overview shows every object in the level.
+	var level_root := get_parent().get_parent()  # Player → Level root
+	if level_root:
+		for child in level_root.get_children():
+			if child is Node2D and not child is Parallax2D:
+				var point := Rect2((child as Node2D).global_position, Vector2.ZERO)
+				if first:
+					bounds = point
+					first = false
+				else:
+					bounds = bounds.merge(point)
+
+	# If nothing was found (empty level?), return a fallback centered on origin
 	if first:
 		bounds = Rect2(-640, -360, 1280, 720)
 
-	# Add margin so tiles at the edges aren't pressed against the screen border
+	# Add margin so objects at the edges aren't pressed against the screen border
 	bounds = bounds.grow(BOUNDS_MARGIN)
 
 	return bounds
