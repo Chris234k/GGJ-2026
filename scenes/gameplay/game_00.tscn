@@ -23,7 +23,7 @@ scale = Vector2(0.49072263, 0.42480466)
 texture = ExtResource("2_xahgy")
 
 [node name="tilemap_always" type="TileMapLayer" parent="." unique_id=298539414]
-tile_map_data = PackedByteArray("AABJABcAAAAJAAkAAABKABcAAAAJAAkAAABLABQAAAAJAAkAAABLABcAAAAJAAkAAABMABcAAAAJAAkAAAA=")
+tile_map_data = PackedByteArray("AABJABcAAAAJAAkAAABKABcAAAAJAAkAAABLABQAAAAJAAkAAABLABcAAAAJAAkAAABMABcAAAAJAAkAAAASACQAAAAJAAkAAAATACQAAAAJAAkAAAAUACEAAAAJAAkAAAAUACQAAAAJAAkAAAAVACQAAAAJAAkAAAA=")
 tile_set = ExtResource("3_8njnv")
 script = ExtResource("4_586fl")
 
@@ -36,6 +36,7 @@ script = ExtResource("4_586fl")
 script = ExtResource("5_bt2qo")
 
 [node name="tilemap_1" type="TileMapLayer" parent="." unique_id=754066882]
+tile_map_data = PackedByteArray("AAAAACQAAAAKAAUAAAABACQAAAAKAAUAAAACACQAAAAKAAUAAAADACQAAAAKAAUAAAAEACQAAAAKAAUAAAAFACQAAAAKAAUAAAAGACQAAAAKAAUAAAAHACQAAAAKAAUAAAAIACQAAAAKAAUAAAAJACQAAAAKAAUAAAAKACQAAAAKAAUAAAALACQAAAAKAAUAAAAMACQAAAAKAAUAAAANACQAAAAKAAUAAAAOACQAAAAKAAUAAAAPACQAAAAKAAUAAAAQACQAAAAKAAUAAAARACQAAAAKAAUAAAASACQAAAAKAAUAAAATACQAAAAKAAUAAAAUACQAAAAKAAUAAAAVACQAAAAKAAUAAAAWACQAAAAKAAUAAAAXACQAAAAKAAUAAAAYACQAAAAKAAUAAAA=")
 tile_set = ExtResource("3_8njnv")
 script = ExtResource("4_586fl")
 
@@ -84,6 +85,14 @@ offset_right = 1290.0
 offset_bottom = 267.0
 theme_override_fonts/font = ExtResource("6_xahgy")
 text = "Please help him"
+
+[node name="Label4" type="Label" parent="." unique_id=1861860279]
+offset_left = 91.0
+offset_top = 603.0
+offset_right = 337.0
+offset_bottom = 626.0
+theme_override_fonts/font = ExtResource("6_xahgy")
+text = "Oh, you've been here before?"
 
 [node name="Player" parent="." unique_id=1785403490 instance=ExtResource("6_2apao")]
 position = Vector2(34, 323)
