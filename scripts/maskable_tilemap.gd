@@ -52,7 +52,8 @@ func _ready() -> void:
 			_bit_index = child.bit_index
 			break
 
-	_create_color_overlay()
+	# _create_color_overlay()
+	_setup_outlines()
 
 func _exit_tree() -> void:
 	GameManager.unregister_tilemap(self)
@@ -101,3 +102,60 @@ func _swap_tiles(target_source: int) -> void:
 		var atlas_coords = get_cell_atlas_coords(coords)
 		var alt = get_cell_alternative_tile(coords)
 		set_cell(coords, target_source, atlas_coords, alt)
+
+
+
+# tile map outlines
+
+enum Side {
+	NONE  = 0,
+
+	TOP   = 1,
+	RIGHT = 2,
+	BOT   = 4,
+	LEFT  = 8,
+}
+
+var outline_shader := load("res://Shaders/tilemap_outline.tres")
+
+func _setup_outlines() -> void:
+	material = outline_shader.duplicate()
+	var mat := material
+
+	var bit_color := GameManager.get_bit_color(_bit_index)
+	mat.set_shader_parameter("outline_color", bit_color)
+
+	var cells := get_used_cells()
+	var sides := PackedInt32Array()
+	sides.resize(cells.size())
+
+	for i in cells.size():
+		var cell := cells[i]
+
+		var t:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_TOP_SIDE)
+		var r:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
+		var l:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
+		var b:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
+
+		var t_id := get_cell_source_id(t)
+		var r_id := get_cell_source_id(r)
+		var l_id := get_cell_source_id(l)
+		var b_id := get_cell_source_id(b)
+
+		sides[i] = Side.NONE
+
+		if t_id == -1:
+			sides[i] |= Side.TOP
+
+		if r_id == -1:
+			sides[i] |= Side.RIGHT
+
+		if l_id == -1:
+			sides[i] |= Side.LEFT
+
+		if b_id == -1:
+			sides[i] |= Side.BOT
+
+	mat.set_shader_parameter("sides", sides)
+	# print(sides)
+	
