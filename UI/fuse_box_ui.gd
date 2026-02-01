@@ -42,8 +42,6 @@ var _toggle_key_primary_name: Array[String]
 
 const CHICAGO_FONT = preload("res://UI/Fonts/ChicagoFLF.ttf")
 const KEY_FONT_SIZE: int = 14
-const MODE_FONT_SIZE: int = 16
-const HINT_FONT_SIZE: int = 12
 
 # Slot dimensions
 const SLOT_WIDTH: int = 36
@@ -248,9 +246,9 @@ func _refresh_mode_label() -> void:
 ##   OFF -> stays OFF : dark/empty
 ##
 ## Selection bar color reflects the *outcome* for that fuse after submit:
-##   green = fuse will be ON after submit
-##   red   = fuse is currently ON but will be turned OFF
-##   dim   = unselected / no change
+##   green = selected and fuse will be ON after submit
+##   red   = something bad: fuse being pulled, or selected but can't help
+##   dim   = no user interaction with this fuse
 ## Slot frame border: subtle glow in bit color if ON, dark default if OFF.
 func _refresh_fuse_slots() -> void:
 	var preview := _compute_preview()
@@ -294,23 +292,15 @@ func _refresh_fuse_slots() -> void:
 		slot_frame.add_theme_stylebox_override("panel", frame_style)
 
 		# --- Selection Bar ---
-		# Color based on outcome: green if fuse will be ON, red if it's about
-		# to be turned OFF, dim gray otherwise.
 		var selection_bar := slot.get_node("SelectionBar") as ColorRect
 		selection_bar.visible = not realtime_mode
 		if not realtime_mode:
-			if current_on and preview_on and selected:
-				# ON and will stay ON — green (protected in KEEP, or already on in INSERT)
+			if preview_on and selected:
+				# Good outcome: this fuse will be ON after submit
 				selection_bar.color = INSERT_COLOR
-			elif current_on and not preview_on:
-				# Currently ON, about to be pulled — red warning
-				selection_bar.color = KEEP_COLOR
-			elif not current_on and preview_on and selected:
-				# OFF but will turn ON — green (INSERT mode)
-				selection_bar.color = INSERT_COLOR
-			elif not current_on and selected:
-				# OFF and selected but won't turn on (KEEP mode) — red to
-				# acknowledge the input and signal "this can't help you"
+			elif not preview_on and (current_on or selected):
+				# Bad outcome: fuse is being pulled (unselected in KEEP),
+				# or selected but can't help (selecting OFF fuse in KEEP)
 				selection_bar.color = KEEP_COLOR
 			else:
 				selection_bar.color = SELECTION_DIM
