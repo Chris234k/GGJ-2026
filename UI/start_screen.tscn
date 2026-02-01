@@ -53,8 +53,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_prompt")
 [node name="PromptLabel" type="RichTextLabel" parent="Content/PromptPanel"]
 layout_mode = 2
 bbcode_enabled = true
-text = "[center][color=#00ff66]Press Space to Start[/color][/center]"
+text = "[center][color=#00ff66][SPACE] Start
+[L] Level Select[/color][/center]"
 fit_content = true
 scroll_active = false
 theme_override_fonts/normal_font = ExtResource("3_font")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 24

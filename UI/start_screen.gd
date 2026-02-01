@@ -1,9 +1,10 @@
 extends Control
 ## Start Screen - Shown on game launch before any level loads.
-## Displays a "Press Space to Start" prompt over the title art.
-## Emits `start_requested` when the player presses Space (confirm_bits action).
+## Emits `start_requested` when Space is pressed, or `level_select_requested`
+## when L is pressed.
 
 signal start_requested
+signal level_select_requested
 
 @onready var prompt_label: RichTextLabel = $Content/PromptPanel/PromptLabel
 
@@ -17,6 +18,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		start_requested.emit()
 		# Mark the input as handled so it doesn't propagate to other nodes
 		# (e.g. the HUD trying to submit bits).
+		get_viewport().set_input_as_handled()
+		return
+
+	# L key opens the level select screen.
+	if event is InputEventKey and event.pressed and event.keycode == KEY_L:
+		level_select_requested.emit()
 		get_viewport().set_input_as_handled()
 
 ## Called by game.gd (via visibility) to start the pulse animation.
