@@ -116,21 +116,38 @@ enum Side {
 	LEFT  = 8,
 }
 
-var outline_shader := load("res://Shaders/tilemap.tres")
+const SHADER_MAX_INTEGERS = 2048
+
+var outline_shader := preload("res://Shaders/tilemap.tres")
 
 func _setup_outlines() -> void:
 	material = outline_shader.duplicate()
-	var mat := material
 
 	var bit_color := GameManager.get_bit_color(_bit_index)
-	mat.set_shader_parameter("outline_color", bit_color)
+	material.set_shader_parameter("outline_color", bit_color)
 
 	var cells := get_used_cells()
 	var sides := PackedInt32Array()
-	sides.resize(cells.size())
-
+	
+	var bounds := get_used_rect()
+	var total_size := Vector2i((bounds.position.x)+bounds.size.x, (bounds.position.y)+bounds.size.y)
+	sides.resize(SHADER_MAX_INTEGERS)
+	
+	material.set_shader_parameter("tilemap_width", total_size.x)
+	material.set_shader_parameter("tile_size", tile_set.tile_size.x)
+	
+	#print(name, " ---------------------")
 	for i in cells.size():
 		var cell := cells[i]
+		
+		var side_index:int = (cell.x + (cell.y * total_size.x));
+		
+		# shader max size is 2048 - pass if bigger
+		if side_index >= SHADER_MAX_INTEGERS:
+			continue
+			
+		var side_data = sides[side_index];
+		#print(cell, " -> ", side_index)
 
 		var t:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_TOP_SIDE)
 		var r:Vector2i = get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
@@ -142,20 +159,16 @@ func _setup_outlines() -> void:
 		var l_id := get_cell_source_id(l)
 		var b_id := get_cell_source_id(b)
 
-		sides[i] = Side.NONE
-
 		if t_id == -1:
-			sides[i] |= Side.TOP
+			sides[side_index] |= Side.TOP
 
 		if r_id == -1:
-			sides[i] |= Side.RIGHT
+			sides[side_index] |= Side.RIGHT
 
 		if l_id == -1:
-			sides[i] |= Side.LEFT
+			sides[side_index] |= Side.LEFT
 
 		if b_id == -1:
-			sides[i] |= Side.BOT
+			sides[side_index] |= Side.BOT
 
-	mat.set_shader_parameter("sides", sides)
-	# print(sides)
-	
+	material.set_shader_parameter("sides", sides)
