@@ -22,16 +22,16 @@ void fragment() {
 	uint side_data = sides[side_index];
 	
 	// top
-	if(side_data & 1 != 0)
+	if((side_data & uint(1)) != uint(0))
 	{
-		if uint(0) == uint(relative_world_coord.y))
+		if (uint(0) == uint(relative_world_coord.y))
 		{
 			COLOR = outline_color;
 		}
 	}
 
 	// right
-	if(side_data & 2 != 0)
+	if( (side_data & uint(2)) != uint(0))
 	{
 		if(uint(tile_size - 1.0) == uint(relative_world_coord.x))
 		{
@@ -40,7 +40,7 @@ void fragment() {
 	}
 
 	// bot
-	if(side_data & 4 != 0)
+	if( (side_data & uint(4)) != uint(0))
 	{
 		if(uint(tile_size - 1.0) == uint(relative_world_coord.y))
 		{
@@ -49,7 +49,7 @@ void fragment() {
 	}
 
 	// left
-	if(side_data & 8 != 0)
+	if( (side_data & uint(8)) != uint(0) )
 	{
 		if(uint(0) == uint(relative_world_coord.x))
 		{ 

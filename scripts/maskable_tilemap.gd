@@ -116,7 +116,7 @@ enum Side {
 	LEFT  = 8,
 }
 
-var outline_shader := load("res://Shaders/tilemap_outline.tres")
+var outline_shader := load("res://Shaders/tilemap.tres")
 
 func _setup_outlines() -> void:
 	material = outline_shader.duplicate()
