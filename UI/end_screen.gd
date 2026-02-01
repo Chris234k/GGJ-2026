@@ -6,6 +6,7 @@ extends Control
 signal menu_requested
 
 @onready var prompt_label: RichTextLabel = $Content/PromptLabel
+@onready var taunt_player: AudioStreamPlayer = $TauntPlayer
 
 var _tween: Tween
 
@@ -24,9 +25,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func show_screen() -> void:
 	visible = true
 	_start_pulse()
+	taunt_player.play()
 
 func hide_screen() -> void:
 	visible = false
+	taunt_player.stop()
 	if _tween:
 		_tween.kill()
 		_tween = null

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cj4tufd00rsoa"]
 
-[ext_resource type="Script" uid="uid://sp317vu7cii0" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://c73lgindfde0v" path="res://scripts/game.gd" id="1_game"]
 [ext_resource type="PackedScene" uid="uid://xegecis5ij0a" path="res://scenes/gameplay/game_00.tscn" id="2_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://bq8b1hv10jtr0" path="res://scenes/gameplay/game_01.tscn" id="2_g01"]
 [ext_resource type="PackedScene" uid="uid://bl0n0th1n7nro" path="res://scenes/gameplay/game_03.tscn" id="3_g02"]
@@ -8,14 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bq06rlnqhphw5" path="res://scenes/gameplay/game_04.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://cbtr4ckgkrn4y" path="res://scenes/gameplay/game_05.tscn" id="6_g05"]
 [ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_enemy2.tscn" id="7_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://t3wnpot2m1d2" path="res://UI/hud_UI.tscn" id="7_hud"]
-[ext_resource type="PackedScene" path="res://UI/start_screen.tscn" id="8_start"]
-[ext_resource type="PackedScene" path="res://UI/level_select_screen.tscn" id="8_lvlsel"]
-[ext_resource type="PackedScene" path="res://UI/pause_screen.tscn" id="9_pause"]
-[ext_resource type="PackedScene" path="res://UI/end_screen.tscn" id="10_end"]
 [ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="7_p57ef"]
 [ext_resource type="PackedScene" uid="uid://0vlvvya72vma" path="res://scenes/gameplay/game_enemy1.tscn" id="7_vtaks"]
 [ext_resource type="PackedScene" uid="uid://je365axajd6c" path="res://scenes/gameplay/game_06.tscn" id="8_kvpfn"]
+[ext_resource type="PackedScene" path="res://UI/level_select_screen.tscn" id="8_lvlsel"]
+[ext_resource type="PackedScene" path="res://UI/start_screen.tscn" id="8_start"]
+[ext_resource type="PackedScene" path="res://UI/pause_screen.tscn" id="9_pause"]
+[ext_resource type="PackedScene" path="res://UI/end_screen.tscn" id="10_end"]
+[ext_resource type="PackedScene" uid="uid://t3wnpot2m1d2" path="res://UI/hud_UI.tscn" id="16_rysoc"]
 
 [node name="Game" type="Node" unique_id=1282430220]
 script = ExtResource("1_game")
@@ -26,15 +26,23 @@ level_scenes = Array[PackedScene]([ExtResource("2_0tnpc"), ExtResource("2_g01"),
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=21999873]
 layer = 10
 
-[node name="StartScreen" parent="UILayer" instance=ExtResource("8_start")]
+[node name="StartScreen" parent="UILayer" unique_id=1832729568 instance=ExtResource("8_start")]
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="LevelSelectScreen" parent="UILayer" instance=ExtResource("8_lvlsel")]
+[node name="LevelSelectScreen" parent="UILayer" unique_id=59805782 instance=ExtResource("8_lvlsel")]
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="PauseScreen" parent="UILayer" instance=ExtResource("9_pause")]
+[node name="PauseScreen" parent="UILayer" unique_id=1565705978 instance=ExtResource("9_pause")]
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="EndScreen" parent="UILayer" instance=ExtResource("10_end")]
+[node name="EndScreen" parent="UILayer" unique_id=408519661 instance=ExtResource("10_end")]
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HudUi" parent="UILayer" instance=ExtResource("7_hud")]
+[node name="HudUi" parent="UILayer" unique_id=541352385 instance=ExtResource("16_rysoc")]
 grow_horizontal = 2
 grow_vertical = 2
 ui_scale = 1.2
