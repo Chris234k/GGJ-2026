@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cj4tufd00rsoa"]
 
-[ext_resource type="Script" uid="uid://c73lgindfde0v" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://sp317vu7cii0" path="res://scripts/game.gd" id="1_game"]
 [ext_resource type="PackedScene" uid="uid://xegecis5ij0a" path="res://scenes/gameplay/game_00.tscn" id="2_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://bq8b1hv10jtr0" path="res://scenes/gameplay/game_01.tscn" id="2_g01"]
 [ext_resource type="PackedScene" uid="uid://bl0n0th1n7nro" path="res://scenes/gameplay/game_03.tscn" id="3_g02"]
@@ -14,10 +14,11 @@
 [ext_resource type="PackedScene" path="res://UI/end_screen.tscn" id="10_end"]
 [ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="7_p57ef"]
 [ext_resource type="PackedScene" uid="uid://0vlvvya72vma" path="res://scenes/gameplay/game_enemy1.tscn" id="7_vtaks"]
+[ext_resource type="PackedScene" uid="uid://je365axajd6c" path="res://scenes/gameplay/game_06.tscn" id="8_kvpfn"]
 
 [node name="Game" type="Node" unique_id=1282430220]
 script = ExtResource("1_game")
-level_scenes = Array[PackedScene]([ExtResource("2_0tnpc"), ExtResource("2_g01"), ExtResource("4_g03"), ExtResource("3_g02"), ExtResource("5_iywne"), ExtResource("6_g05"), ExtResource("7_vtaks"), ExtResource("7_0tnpc")])
+level_scenes = Array[PackedScene]([ExtResource("2_0tnpc"), ExtResource("2_g01"), ExtResource("4_g03"), ExtResource("3_g02"), ExtResource("5_iywne"), ExtResource("6_g05"), ExtResource("7_vtaks"), ExtResource("7_0tnpc"), ExtResource("8_kvpfn")])
 
 [node name="LevelSlot" type="Node" parent="." unique_id=337242142]
 
