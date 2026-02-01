@@ -20,12 +20,16 @@ var _current_level_instance: Node = null
 @onready var level_slot: Node = $LevelSlot
 @onready var hud_ui: Control = $UILayer/HudUi
 @onready var start_screen: Control = $UILayer/StartScreen
+@onready var level_select_screen: Control = $UILayer/LevelSelectScreen
 @onready var pause_screen: Control = $UILayer/PauseScreen
 @onready var end_screen: Control = $UILayer/EndScreen
 
 func _ready() -> void:
 	GameManager.level_completed.connect(_on_level_completed)
 	start_screen.start_requested.connect(_on_start_requested)
+	start_screen.level_select_requested.connect(_on_level_select_requested)
+	level_select_screen.level_selected.connect(_on_level_selected)
+	level_select_screen.back_requested.connect(_on_level_select_back)
 	pause_screen.resume_requested.connect(_on_resume_requested)
 	pause_screen.quit_requested.connect(_on_quit_requested)
 	end_screen.menu_requested.connect(_on_end_menu_requested)
@@ -61,8 +65,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 # --- State Transitions ---
 
-func start_game() -> void:
-	_current_level_index = 0
+func start_game(level_index: int = 0) -> void:
+	_current_level_index = level_index
 	_set_state(GameState.PLAYING)
 	load_level(_current_level_index)
 
@@ -138,6 +142,11 @@ func _update_ui_for_state(state: GameState) -> void:
 	else:
 		start_screen.hide_screen()
 
+	# Level select is not tied to a state — it's a sub-screen of MAIN_MENU.
+	# Hide it on any state change so it doesn't linger when starting a game
+	# or returning to menu.
+	level_select_screen.hide_screen()
+
 	if state == GameState.GAME_OVER:
 		end_screen.show_screen()
 	else:
@@ -162,6 +171,19 @@ func _on_quit_requested() -> void:
 
 func _on_end_menu_requested() -> void:
 	return_to_menu()
+
+func _on_level_select_requested() -> void:
+	start_screen.hide_screen()
+	level_select_screen.populate_levels(level_scenes.size())
+	level_select_screen.show_screen()
+
+func _on_level_selected(index: int) -> void:
+	level_select_screen.hide_screen()
+	start_game(index)
+
+func _on_level_select_back() -> void:
+	level_select_screen.hide_screen()
+	start_screen.show_screen()
 
 func _on_level_completed() -> void:
 	if current_state == GameState.PLAYING:

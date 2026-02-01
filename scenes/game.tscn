@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://clpcwb8xlc0b2" path="res://scenes/gameplay/game_enemy2.tscn" id="7_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://t3wnpot2m1d2" path="res://UI/hud_UI.tscn" id="7_hud"]
 [ext_resource type="PackedScene" path="res://UI/start_screen.tscn" id="8_start"]
+[ext_resource type="PackedScene" path="res://UI/level_select_screen.tscn" id="8_lvlsel"]
 [ext_resource type="PackedScene" path="res://UI/pause_screen.tscn" id="9_pause"]
 [ext_resource type="PackedScene" path="res://UI/end_screen.tscn" id="10_end"]
 [ext_resource type="AudioStream" uid="uid://c1lldbd5nb7qb" path="res://sound/20260129_Digital Hell.wav" id="7_p57ef"]
@@ -26,6 +27,8 @@ level_scenes = Array[PackedScene]([ExtResource("2_0tnpc"), ExtResource("2_g01"),
 layer = 10
 
 [node name="StartScreen" parent="UILayer" instance=ExtResource("8_start")]
+
+[node name="LevelSelectScreen" parent="UILayer" instance=ExtResource("8_lvlsel")]
 
 [node name="PauseScreen" parent="UILayer" instance=ExtResource("9_pause")]
 
