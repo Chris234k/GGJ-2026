@@ -37,6 +37,7 @@ extends Area2D
 ## When true, this teleporter won't activate. Used to prevent infinite loops:
 ## the exit teleporter is put on cooldown right before the body arrives.
 var _is_on_cooldown: bool = false
+const PORTAL_CONNECTOR = preload("uid://fnup5abbghmm")
 
 ## Tracks total elapsed time for the pulse animation.
 ## We feed this into sin() to get a smooth oscillation.
@@ -51,6 +52,20 @@ func _ready() -> void:
 	# Area2D emits body_entered when a physics body overlaps our CollisionShape2D.
 	# We connect that signal to our handler so we know when something steps in.
 	body_entered.connect(_on_body_entered)
+	
+	var lineConnector = PORTAL_CONNECTOR.instantiate()
+	var connected = _get_paired_teleporter()
+	
+	if !connected.has_node("ConnectorLine"):
+	
+		lineConnector.width = 10
+		lineConnector.name = "ConnectorLine"
+		lineConnector.set_point_position(0,Vector2.ZERO)
+		lineConnector.set_point_position(1,connected.global_position - global_position)
+		lineConnector.default_color = Color(randf(),randf(),randf())
+		lineConnector.get_child(0).direction = Vector2(connected.global_position - global_position)
+		add_child(lineConnector)
+	
 
 	# Capture the sprite's scale as set in the scene so the pulse animation
 	# can use it as a baseline. Change the scale in the Inspector and the

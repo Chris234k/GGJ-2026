@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://fnup5abbghmm"]
+
+[ext_resource type="Texture2D" uid="uid://b6u1kya7gip3m" path="res://art/Images/Enemy/villain_jump_01_256x256.png" id="1_cd0el"]
+
+[sub_resource type="Gradient" id="Gradient_cd0el"]
+colors = PackedColorArray(0.7647059, 0.4627451, 0.08235294, 0.101960786, 0.43137255, 1, 1, 0.101960786)
+
+[sub_resource type="Curve" id="Curve_omnxn"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.30363208), 0.0, 0.0, 0, 0, Vector2(0.51546395, 0.6806898), 0.0, 0.0, 0, 0, Vector2(1, 0.31721973), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_s42sl"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.29344136), 0.0, 0.0, 0, 0, Vector2(0.5051546, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.29004443), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="PortalConnector" type="Line2D" unique_id=296223096]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 100.0
+gradient = SubResource("Gradient_cd0el")
+
+[node name="PortalEmitter" type="CPUParticles2D" parent="." unique_id=529378419]
+amount = 20
+texture = ExtResource("1_cd0el")
+lifetime = 10.0
+direction = Vector2(0, 0)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+radial_accel_curve = SubResource("Curve_omnxn")
+tangential_accel_curve = SubResource("Curve_s42sl")
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
