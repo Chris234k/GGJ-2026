@@ -23,6 +23,7 @@ var _current_level_instance: Node = null
 @onready var level_select_screen: Control = $UILayer/LevelSelectScreen
 @onready var pause_screen: Control = $UILayer/PauseScreen
 @onready var end_screen: Control = $UILayer/EndScreen
+@onready var bgm: AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready() -> void:
 	GameManager.level_completed.connect(_on_level_completed)
@@ -148,9 +149,12 @@ func _update_ui_for_state(state: GameState) -> void:
 	level_select_screen.hide_screen()
 
 	if state == GameState.GAME_OVER:
+		bgm.stop()
 		end_screen.show_screen()
 	else:
 		end_screen.hide_screen()
+		if not bgm.playing:
+			bgm.play()
 
 	hud_ui.visible = (state == GameState.PLAYING)
 	# Disable HUD input processing when not playing so A/S/D/F/Tab/Space
