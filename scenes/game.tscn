@@ -21,7 +21,10 @@ level_scenes = Array[PackedScene]([ExtResource("2_0tnpc"), ExtResource("2_g01"),
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=21999873]
 layer = 10
 
-[node name="HudUi" parent="UILayer" unique_id=292927964 instance=ExtResource("7_hud")]
+[node name="HudUi" parent="UILayer" instance=ExtResource("7_hud")]
+grow_horizontal = 2
+grow_vertical = 2
+ui_scale = 1.2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=572198820]
 stream = ExtResource("7_p57ef")

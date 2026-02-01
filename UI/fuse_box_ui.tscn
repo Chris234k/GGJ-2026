@@ -1,0 +1,87 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://UI/fuse_box_ui.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://be85l0hqahuhe" path="res://UI/Fonts/ChicagoFLF.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bnrcoiph3f46p" path="res://UI/Images/ui_panel_01.png" id="3_panel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keycap"]
+bg_color = Color(0.14, 0.14, 0.18, 0.85)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 3
+border_color = Color(0.35, 0.35, 0.4, 0.6)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_left = 2
+corner_radius_bottom_right = 2
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
+texture = ExtResource("3_panel")
+texture_margin_left = 8.0
+texture_margin_top = 34.0
+texture_margin_right = 8.0
+texture_margin_bottom = 5.0
+content_margin_left = 24.0
+content_margin_top = 38.0
+content_margin_right = 24.0
+content_margin_bottom = 12.0
+
+[node name="FuseBoxUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_script")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 12.0
+offset_right = -12.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ModeRow" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ModeLabel" type="RichTextLabel" parent="Panel/VBox/ModeRow"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+fit_content = true
+text = "[center][color=#00FF66]INSERT[/color][/center]"
+
+[node name="SpaceKey" type="PanelContainer" parent="Panel/VBox/ModeRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_keycap")
+
+[node name="SpaceHint" type="RichTextLabel" parent="Panel/VBox/ModeRow/SpaceKey"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_font")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+fit_content = true
+text = "[center][color=#888888]SPACE[/color][/center]"
+
+[node name="FuseRow" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
