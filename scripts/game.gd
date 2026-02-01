@@ -12,18 +12,30 @@ var current_state: GameState = GameState.MAIN_MENU
 
 # --- Level Configuration ---
 @export var level_scenes: Array[PackedScene] = []
-@export var auto_start: bool = true
+@export var auto_start: bool = false
 
 var _current_level_index: int = 0
 var _current_level_instance: Node = null
 
 @onready var level_slot: Node = $LevelSlot
+@onready var hud_ui: Control = $UILayer/HudUi
+@onready var start_screen: Control = $UILayer/StartScreen
+@onready var pause_screen: Control = $UILayer/PauseScreen
+@onready var end_screen: Control = $UILayer/EndScreen
 
 func _ready() -> void:
 	GameManager.level_completed.connect(_on_level_completed)
+	start_screen.start_requested.connect(_on_start_requested)
+	pause_screen.resume_requested.connect(_on_resume_requested)
+	pause_screen.quit_requested.connect(_on_quit_requested)
+	end_screen.menu_requested.connect(_on_end_menu_requested)
 
+	# Show the correct UI for the initial state. If auto_start is true
+	# (useful for debugging), skip the start screen and jump into gameplay.
 	if auto_start:
 		start_game()
+	else:
+		_update_ui_for_state(GameState.MAIN_MENU)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed:
@@ -72,6 +84,9 @@ func return_to_menu() -> void:
 	_set_state(GameState.MAIN_MENU)
 
 func restart_game() -> void:
+	# If paused, unpause first so the tree isn't frozen during reset.
+	if get_tree().paused:
+		pause_screen.unpause()
 	return_to_menu()
 	start_game()
 
@@ -109,8 +124,44 @@ func _cleanup_level() -> void:
 
 func _set_state(new_state: GameState) -> void:
 	current_state = new_state
+	_update_ui_for_state(new_state)
 	game_state_changed.emit(new_state)
 	print("Game state: %s" % GameState.keys()[new_state])
+
+## Show/hide UI elements based on the current game state.
+## Start screen is only visible in MAIN_MENU; HUD is only visible while PLAYING.
+func _update_ui_for_state(state: GameState) -> void:
+	# Start screen and end screen use show/hide methods so they can
+	# start/stop their pulse tweens cleanly.
+	if state == GameState.MAIN_MENU:
+		start_screen.show_screen()
+	else:
+		start_screen.hide_screen()
+
+	if state == GameState.GAME_OVER:
+		end_screen.show_screen()
+	else:
+		end_screen.hide_screen()
+
+	hud_ui.visible = (state == GameState.PLAYING)
+	# Disable HUD input processing when not playing so A/S/D/F/Tab/Space
+	# don't accidentally toggle bits on menu screens.
+	hud_ui.set_process(state == GameState.PLAYING)
+	pause_screen.can_pause = (state == GameState.PLAYING)
+
+func _on_start_requested() -> void:
+	start_game()
+
+func _on_resume_requested() -> void:
+	pause_screen.unpause()
+
+func _on_quit_requested() -> void:
+	# Unpause first so the tree isn't frozen when we transition states.
+	pause_screen.unpause()
+	return_to_menu()
+
+func _on_end_menu_requested() -> void:
+	return_to_menu()
 
 func _on_level_completed() -> void:
 	if current_state == GameState.PLAYING:

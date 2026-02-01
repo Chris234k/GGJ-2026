@@ -37,7 +37,7 @@ extends Area2D
 ## When true, this teleporter won't activate. Used to prevent infinite loops:
 ## the exit teleporter is put on cooldown right before the body arrives.
 var _is_on_cooldown: bool = false
-const PORTAL_CONNECTOR = preload("uid://fnup5abbghmm")
+const PORTAL_CONNECTOR = preload("res://UI/PortalConnector.tscn")
 
 ## Tracks total elapsed time for the pulse animation.
 ## We feed this into sin() to get a smooth oscillation.
